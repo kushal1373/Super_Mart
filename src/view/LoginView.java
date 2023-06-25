@@ -251,9 +251,11 @@ LoginModel model;
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         // TODO add your handling code here:
        LoginController l = new LoginController(this);
-        setVisible(false);
-        ManageProduct r = new ManageProduct();
-        r.setVisible(true);
+
+//        setVisible(false);
+//        ManageProduct r = new ManageProduct();
+//        r.setVisible(true);
+        
     }//GEN-LAST:event_btnloginActionPerformed
 
     private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed

@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import model.*;
 import view.*;
 import java.sql.*;
+import javax.swing.JOptionPane;
 public class LoginController {
     LoginModel model;
     LoginView view;
@@ -20,18 +21,23 @@ public class LoginController {
     {
         this.view=view;
         
-        view.addLoginListener(new LoginListener());
+       new LoginListener().actionPerformed();
+        
         
         
     }
-    class LoginListener implements ActionListener
+    class LoginListener 
     {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
+       
+        public void actionPerformed() {
             try
             {
                 model=view.getUser();
+          
+                if(model.getUsername().isEmpty() || model.getPassword().isEmpty()){
+                  JOptionPane.showMessageDialog(null,"This Box are Empty.", "ERROR",JOptionPane.ERROR_MESSAGE);
+        }
                 if(checkUser(model))
                 {
                     view.setMessage("Login Successfully");
@@ -72,6 +78,8 @@ public class LoginController {
             
             return false;
         }
+        
+        
         
     }
     

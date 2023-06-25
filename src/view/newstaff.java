@@ -19,6 +19,7 @@ public class newstaff extends javax.swing.JFrame {
     /**
      * Creates new form newstaff
      */
+    
     public newstaff() {
         initComponents();
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -44,9 +45,9 @@ public class newstaff extends javax.swing.JFrame {
         txtposition = new javax.swing.JTextField();
         combogender = new javax.swing.JComboBox<>();
         bttnadd = new javax.swing.JToggleButton();
-        bttnedit = new javax.swing.JToggleButton();
+        bttnupdate = new javax.swing.JToggleButton();
         bttndelete = new javax.swing.JToggleButton();
-        bttnclear = new javax.swing.JToggleButton();
+        bttnview = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablestaff = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -100,28 +101,38 @@ public class newstaff extends javax.swing.JFrame {
 
         bttnadd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bttnadd.setText("ADD");
+        bttnadd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bttnaddMouseClicked(evt);
+            }
+        });
         bttnadd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnaddActionPerformed(evt);
             }
         });
 
-        bttnedit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        bttnedit.setText("EDIT");
-        bttnedit.addActionListener(new java.awt.event.ActionListener() {
+        bttnupdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bttnupdate.setText("UPDATE");
+        bttnupdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttneditActionPerformed(evt);
+                bttnupdateActionPerformed(evt);
             }
         });
 
         bttndelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bttndelete.setText("DELETE");
-
-        bttnclear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        bttnclear.setText("CLEAR");
-        bttnclear.addActionListener(new java.awt.event.ActionListener() {
+        bttndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnclearActionPerformed(evt);
+                bttndeleteActionPerformed(evt);
+            }
+        });
+
+        bttnview.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bttnview.setText("VIEW");
+        bttnview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnviewActionPerformed(evt);
             }
         });
 
@@ -154,11 +165,11 @@ public class newstaff extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bttnadd, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
-                        .addComponent(bttnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bttnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
                         .addComponent(bttndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
-                        .addComponent(bttnclear, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bttnview, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(124, 124, 124)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,9 +212,9 @@ public class newstaff extends javax.swing.JFrame {
                         .addComponent(txtstaffname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(51, 51, 51)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bttnclear, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bttnview, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bttndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bttnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bttnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bttnadd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,13 +338,13 @@ public class newstaff extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bttnaddActionPerformed
 
-    private void bttneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttneditActionPerformed
+    private void bttnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnupdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bttneditActionPerformed
+    }//GEN-LAST:event_bttnupdateActionPerformed
 
-    private void bttnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnclearActionPerformed
+    private void bttnviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnviewActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bttnclearActionPerformed
+    }//GEN-LAST:event_bttnviewActionPerformed
 
     private void bttnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnbackActionPerformed
         // TODO add your handling code here:
@@ -357,6 +368,15 @@ public class newstaff extends javax.swing.JFrame {
         LoginView r = new LoginView();
         r.setVisible(true);
     }//GEN-LAST:event_bttnlogoutActionPerformed
+
+    private void bttnaddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttnaddMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_bttnaddMouseClicked
+
+    private void bttndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttndeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bttndeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -396,10 +416,10 @@ public class newstaff extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton bttnadd;
     private javax.swing.JButton bttnback;
-    private javax.swing.JToggleButton bttnclear;
     private javax.swing.JToggleButton bttndelete;
-    private javax.swing.JToggleButton bttnedit;
     private javax.swing.JButton bttnlogout;
+    private javax.swing.JToggleButton bttnupdate;
+    private javax.swing.JToggleButton bttnview;
     private javax.swing.JComboBox<String> combogender;
     private javax.swing.JLabel image4;
     private javax.swing.JLabel jLabel1;

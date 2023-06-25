@@ -22,15 +22,15 @@ public class RegisterController {
             this.view=view;
        
             
-             view.addRegistrationListener(new RegisterListener());
+            new RegisterListener().actionPerformed();
         }
         
         
-    class RegisterListener implements ActionListener
+    class RegisterListener 
     {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
+     
+        public void actionPerformed() {
     try {
         model = view.getUser();
         if (model.getUsername().isEmpty() || model.getFname().isEmpty() || model.getLname().isEmpty() || model.getEmail().isEmpty() || model.getGender().isEmpty() || model.getRole().isEmpty() || model.getPassword().isEmpty() || model.getconfirmPassword().isEmpty()) {

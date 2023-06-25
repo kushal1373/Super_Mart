@@ -71,11 +71,11 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="bttnadd" min="-2" pref="79" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                          <Component id="bttnedit" min="-2" pref="79" max="-2" attributes="0"/>
+                          <Component id="bttnupdate" min="-2" pref="79" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           <Component id="bttndelete" min="-2" pref="79" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                          <Component id="bttnclear" min="-2" pref="79" max="-2" attributes="0"/>
+                          <Component id="bttnview" min="-2" pref="79" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
@@ -132,9 +132,9 @@
                   </Group>
                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="bttnclear" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="bttnview" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="bttndelete" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="bttnedit" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="bttnupdate" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="bttnadd" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -240,18 +240,19 @@
             <Property name="text" type="java.lang.String" value="ADD"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bttnaddMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnaddActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="bttnedit">
+        <Component class="javax.swing.JToggleButton" name="bttnupdate">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="EDIT"/>
+            <Property name="text" type="java.lang.String" value="UPDATE"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttneditActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnupdateActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="bttndelete">
@@ -261,16 +262,19 @@
             </Property>
             <Property name="text" type="java.lang.String" value="DELETE"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttndeleteActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="bttnclear">
+        <Component class="javax.swing.JToggleButton" name="bttnview">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="CLEAR"/>
+            <Property name="text" type="java.lang.String" value="VIEW"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnclearActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnviewActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
