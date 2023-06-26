@@ -41,12 +41,23 @@ public class LoginController {
                 if(checkUser(model))
                 {
                     view.setMessage("Login Successfully");
+                    ManagerView MV = new ManagerView();
+                    MV.show();       
                 }
                 else
                 {
-                    view.setMessage("Invalid username or password");
-                    
+                    view.setMessage("Invalid Username or Password or Role");  
                 }
+//                if(checkUser(model))
+//                {
+//                    view.setMessage("Login Successfully");
+//                    billingform BF = new billingform();
+//                    BF.show();       
+//                }
+//                else
+//                {
+//                    view.setMessage("Invalid Username or Password or Role");  
+//                }
             }
             catch(Exception e1)
             {
@@ -58,7 +69,7 @@ public class LoginController {
         {
              Class.forName("com.mysql.cj.jdbc.Driver");
                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","9808640305@Sr");
-          String sql="select * from register where username='"+user.getUsername()+"' AND password='"+user.getPassword()+"'";
+          String sql="select * from register where username='"+user.getUsername()+"' AND password='"+user.getPassword()+"' AND role ='"+user.getRole()+"'";
           try
           {
             stmt=conn.createStatement();
