@@ -6,7 +6,9 @@ package view;
 //import java.sql.*;
 import controller.*;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import model.*;
 /**
@@ -15,17 +17,14 @@ import model.*;
  */
 public class categoryView extends javax.swing.JFrame {
     categoryModel model;
-//    DefaultTableModel dtm =null;
-//    Connection conn = null;
-//    Statement stmt = null;
-//    ResultSet rs = null;
+   
+  
     /**
      * Creates new form categoryView
      */
     public categoryView() {
-        initComponents();
+        initComponents();  
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +38,7 @@ public class categoryView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableModel = new javax.swing.JTable();
         updateBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
@@ -64,8 +63,8 @@ public class categoryView extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("CATEGORIES LIST");
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableModel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tableModel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -76,7 +75,7 @@ public class categoryView extends javax.swing.JFrame {
                 "CATEGORY ID", "CATEGORY NAME", "DESCRIPTION"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableModel);
 
         updateBtn.setBackground(new java.awt.Color(204, 204, 204));
         updateBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -260,24 +259,6 @@ public class categoryView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_backBtnActionPerformed
 
-//    public void showData(){
-//        dtm=(DefaultTableModel) viewbtn.getModel();
-//        conn = Dbconnection.dbConnect();
-//        try{
-//            stmt = conn.createStatement();
-//            String sql = "select * from category";
-//            dtm.setRowCount(0);
-//            ResultSet rs = stmt.executeQuery(sql);
-//            while(rs.next())
-//            {
-//                dtm.addRow(new Object[]{rs.getInt("categoryId"),rs.getString("categoryName"),rs.getString("description")});
-//            }
-//        }
-//        catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
     public categoryModel getUser() {
         int categoryId = Integer.parseInt(txtcategoryId.getText());
         model = new categoryModel(categoryId, txtcategoryName.getText(), txtdescription.getText());
@@ -289,11 +270,19 @@ public class categoryView extends javax.swing.JFrame {
     }
  public void addcategoryListener(ActionListener log) {
         addBtn.addActionListener(log);
-        deleteBtn.addActionListener(log);
-        updateBtn.addActionListener(log);
-        backBtn.addActionListener(log);
-        viewbtn.addActionListener(log);
+
     }
+   public void adddeleteListener(ActionListener log) {
+        deleteBtn.addActionListener(log);
+
+   }
+   public void addupdateListener(ActionListener log) {
+         updateBtn.addActionListener(log);
+   }
+   public void addviewListener(ActionListener log) {
+         viewbtn.addActionListener(log);
+   }
+   
     /**
      * @param args the command line arguments
      */
@@ -340,11 +329,15 @@ public class categoryView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableModel;
     private javax.swing.JTextField txtcategoryId;
     private javax.swing.JTextField txtcategoryName;
     private javax.swing.JTextField txtdescription;
     private javax.swing.JButton updateBtn;
     private javax.swing.JButton viewbtn;
     // End of variables declaration//GEN-END:variables
+public void setTableModel(DefaultTableModel Model) {
+    // Set the table model to your view's table
+  tableModel.setModel(Model);
+}
 }

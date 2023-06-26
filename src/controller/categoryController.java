@@ -2,224 +2,162 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import java.sql.*;
-import java.awt.print.PrinterException;
-import java.text.MessageFormat;
-import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JTable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
-import model.categoryDAO;
 import model.categoryModel;
+import model.categoryDAO;
 import view.categoryView;
 
-/**
- *
- * author User
- */
-public class categoryController implements ActionListener {
-    private categoryModel mod;
-    private categoryDAO modDAO;
-    private categoryView stupage;
-    private JTable jTable;
-    private JButton addBtn;
-    private JButton deleteBtn;
-    private JButton updateBtn;
-    private JButton viewbtn;
-    private JButton refreshBtn;
+public class categoryController {
+    private categoryModel model;
+    private categoryView view;
+    private categoryDAO dao;
     
-    
-    
-
-    
-    public categoryController(categoryModel mod, categoryDAO modDAO, categoryView stupage)
-    {
-        this.mod = mod;
-        this.modDAO = modDAO;
-        this.stupage = stupage;
-        this.addBtn = addBtn;
-        this.txtcategoryId=txtcategoryId;
-       
+    public categoryController(categoryView view) {
+        this.view = view;
+        this.dao = new categoryDAO();
         
-        
-        this.btnPrint.addActionListener(this);
-        
-        
-        this.stupage.addBtn.addActionListener(this);
-        this.stupage.updateBtn.addActionListener(this);
-        this.stupage.deleteBtn.addActionListener(this);
-        this.stupage.viewbtn.addActionListener(this);
-        
-
-        this.jTable = stupage.jTable;
-
+        view.addcategoryListener(new categoryListener());
+        view.adddeleteListener(new deleteListener());
+        view.addupdateListener(new updateListener());
+        view.addviewListener(new viewListener());
     }
     
-    public void start()
-    {
-        stupage.setTitle("Student Registration Page");
-        stupage.setLocationRelativeTo(null);
-        stupage.txtcategoryId.setVisible(true);
-        refreshTable();
-    }
-    
-    @Override
-    
-    public void actionPerformed(ActionEvent e)
-    {
-        if(e.getSource() == addbtn)
-        {
-            if (validateFields()) {
-//                mod.setCategoryId(stupage.txtcategoryId.getText());
-                mod.setCategoryName(stupage.txtcategoryName.getText());
-                mod.setDescription(stupage.txtdescription.getText());
-                
-                if(modDAO.add(mod))
-                {
-                    JOptionPane.showMessageDialog(null, "Added Successfully");
-                    clear();
-                    refreshTable();
-                    
-                } else {
-                    JOptionPane.showMessageDialog(null, "Cannot be Added");
-                    clear();
-                }   
-            }
-            
-        }
-        
-        if(e.getSource() == stupage.updateBtn)
-        {
-            if (validateFields()) {
-                mod.setCategoryId(Integer.parseInt(stupage.txtcategoryId.getText()));
-                mod.setCategoryName(stupage.txtcategoryName.getText());
-                mod.setDescription(stupage.txtdescription.getText());
-                
-                
-                
-                if(modDAO.update(mod))
-                {
-                    JOptionPane.showMessageDialog(null, "Updated Successfully");
-                    clear();
-                    refreshTable();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error in Updating");
-                    clear();
-                }   
-            }
-            
-        }
-        
-        if(e.getSource() == stupage.deleteBtn)
-        {
-            if (validateIDField()) {
-                mod.setCategoryId(Integer.parseInt(stupage.txtcategoryId.getText()));
-                
-                
-                if(modDAO.delete(mod))
-                {
-                    JOptionPane.showMessageDialog(null, "Deleted Successfully");
-                    clear();
-                    refreshTable();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error in Deleting");
-                    clear();
-                    
-                }   
-            }
-            
-        }
-        
-        if(e.getSource() == stupage.btnSearch)
-        {
-            if (validateIDField()) {
-                mod.setStudent_id(Integer.parseInt(stupage.txtID.getText())); 
-                
-                if(modDAO.search(mod))
-                {
-                    stupage.txtID.setText(String.valueOf(mod.getStudent_id()));
-                    stupage.txtAddress.setText(mod.getAddress());
-                    stupage.txtAge.setText(String.valueOf(mod.getAge()));
-                    stupage.txtEmail.setText(mod.getEmail());
-                    stupage.txtFirstName.setText(mod.getFirst_name());
-                    stupage.txtLastName.setText(mod.getLast_name());
-                    stupage.txtPhoneNumber.setText(mod.getPhone_number());
-                   
-                } else {
-                    JOptionPane.showMessageDialog(null, "No Record Found");
-                    clear();
-                }   
-            }
-            
-        }
-
-        if (e.getSource() == btnPrint) {
-            MessageFormat header = new MessageFormat("Students Information");
-            MessageFormat footer = new MessageFormat("Page {0,number,integer}");
-
+    class categoryListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
             try {
-                jTable.print(JTable.PrintMode.NORMAL, header, footer);
-            } catch (PrinterException ex) {
-                System.out.println(ex.getMessage());
+                model = view.getUser();
+                if (addcategory(model)) {
+                    view.setMessage("Success");
+                } else {
+                    view.setMessage("Error");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
         
-        if(e.getSource() == stupage.btnClear){
-            clear();
-        }
-        
-        if (e.getSource() == stupage.btnRefresh) {
-            refreshTable();
+        public boolean addcategory(categoryModel category) throws Exception {
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "binumaka008!");
+                 PreparedStatement pst = conn.prepareStatement("INSERT INTO category (categoryId, categoryName, description) VALUES (?, ?, ?)")) {
+
+                pst.setInt(1, category.getCategoryId());
+                pst.setString(2, category.getCategoryName());
+                pst.setString(3, category.getDescription());
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                throw e;
+            }
         }
     }
     
-    public void clear()
-    {
-        stupage.txtcategoryId.setText(null);
-        stupage.txtcategoryName.setText(null);
-        stupage.txtdescription.setText(null);
+    class deleteListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                model = view.getUser();
+                if (deleteCategory(model)) {
+                    view.setMessage("Success to delete");
+                } else {
+                    view.setMessage("Error");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
         
-    }        
-    
-    private void refreshTable() {
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.setRowCount(0); // Clear existing table data
+        public boolean deleteCategory(categoryModel category) throws Exception {
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "binumaka008!");
+                 PreparedStatement pst = conn.prepareStatement("DELETE FROM category WHERE categoryId = ?")) {
 
-        // Retrieve all students from the database
-        categoryDAO studentDAO = new categoryDAO();
-        List<categoryModel> students = studentDAO.getAllcategory(); 
+                pst.setInt(1, category.getCategoryId());
 
-        // Iterate through the students and add them to the table
-        for (categoryModel student : students) {
-            Object[] row = {student.getCategoryId(), student.getCategoryName(), student.getDescription()};
-            model.addRow(row);
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                throw e;
+            }
         }
-    }    
-    
-    private boolean validateFields() {
-        if (stupage.txtcategoryName.getText().isEmpty() || stupage.txtdescription.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please fill in all the fields.");
-            return false;
-        }
-        
-        try {
-            Integer.parseInt(stupage.txtcategoryId.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "categoryId must be an integer.");
-            return false;
-        }
-        
-        
-        return true;
     }
     
-    private boolean validateIDField() {
-        if (stupage.txtcategoryId.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter a category ID.");
-            return false;
+    class updateListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                model = view.getUser();
+                if (updateCategory(model)) {
+                    view.setMessage("Success to update");
+                } else {
+                    view.setMessage("Error");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         
-        return true;
+        public boolean updateCategory(categoryModel category) throws Exception {
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "binumaka008!");
+                 PreparedStatement pst = conn.prepareStatement("UPDATE category SET categoryName = ?, description = ? WHERE categoryId = ?")) {
+
+                pst.setString(1, category.getCategoryName());
+                pst.setString(2, category.getDescription());
+                pst.setInt(3, category.getCategoryId());
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                throw e;
+            }
+        }
+    }
+    
+    class viewListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                viewCategories();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        public void viewCategories() throws Exception {
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "binumaka008!");
+         PreparedStatement pst = conn.prepareStatement("SELECT * FROM category");
+         ResultSet rs = pst.executeQuery()) {
+        
+        // Create a table model to hold the category data
+        DefaultTableModel tableModel = new DefaultTableModel();
+        
+        // Add column names to the table model
+        tableModel.addColumn("Category ID");
+        tableModel.addColumn("Category Name");
+        tableModel.addColumn("Description");
+        
+        // Process the result set and add the data to the table model
+        while (rs.next()) {
+            int categoryId = rs.getInt("categoryId");
+            String categoryName = rs.getString("categoryName");
+            String description = rs.getString("description");
+            
+            // Add the category data to the table model as a new row
+            tableModel.addRow(new Object[] {categoryId, categoryName, description});
+        }
+        
+        // Set the table model to the view's table
+        view.setTableModel(tableModel);
+    } catch (SQLException e) {
+        throw e;
     }
 }
+
+        }
+    }
+

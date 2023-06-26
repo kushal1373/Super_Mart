@@ -4,12 +4,17 @@
  */
 package model;
 
-/**
- *
- * @author Acer
- */
+
 public class categoryModel {
     String  categoryName, description;
+
+//    public String getTableModel() {
+//        return tableModel;
+//    }
+//
+//    public void setTableModel(String tableModel) {
+//        this.tableModel = tableModel;
+//    }
     int categoryId;
     public categoryModel(int categoryId, String categoryName, String description)
     {
@@ -41,4 +46,6 @@ public class categoryModel {
     public void setDescription(String description) {
         this.description = description;
     }
+    
 }
+
