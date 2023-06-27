@@ -236,22 +236,22 @@ public class categoryView extends javax.swing.JFrame {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-        categorycontroller c = new categorycontroller(this);
+        categoryController c = new categoryController(this);
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-        categorycontroller c = new categorycontroller(this);
+        categoryController c = new categoryController(this);
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-       categorycontroller c = new categorycontroller(this);
+       categoryController c = new categoryController(this);
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void viewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewbtnActionPerformed
         // TODO add your handling code here:
-        categorycontroller c = new categorycontroller(this);
+        categoryController c = new categoryController(this);
     }//GEN-LAST:event_viewbtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

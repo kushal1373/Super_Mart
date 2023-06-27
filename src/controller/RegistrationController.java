@@ -22,11 +22,8 @@ public class RegistrationController {
         new RegisterListener().actionPerformed();
     }
 
-<<<<<<< HEAD:src/controller/RegistrationController.java
-    class RegisterListener  {
-=======
+
     class RegisterListener {
->>>>>>> bf1bfcb89072abf0d018856825cff902ff5c0930:src/controller/RegisterController.java
         
         public void actionPerformed() {
             try {
