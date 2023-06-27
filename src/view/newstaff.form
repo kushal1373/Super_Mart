@@ -401,11 +401,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="image4">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/image/new-registration-icon_1_124x109.png"/>
-                </Property>
-              </Properties>
               <Events>
                 <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="image4AncestorAdded"/>
               </Events>

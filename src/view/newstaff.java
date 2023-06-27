@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.StaffModel;
 import view.LoginView;
-import view.ManageProduct;
 
 /**
  *
@@ -256,7 +255,6 @@ public class newstaff extends javax.swing.JFrame {
             }
         });
 
-        image4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/new-registration-icon_1_124x109.png"))); // NOI18N
         image4.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 image4AncestorAdded(evt);
@@ -379,11 +377,11 @@ public class newstaff extends javax.swing.JFrame {
 
     private void image4AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_image4AncestorAdded
         // TODO add your handling code here:
-         ImageIcon icon = new ImageIcon ("D:\\2nd sem\\LED\\images\\seller.png");
-           Image img= icon.getImage();
-           Image imgScale = img.getScaledInstance (image4.getWidth(),image4.getHeight(),Image.SCALE_SMOOTH);
-           ImageIcon scaledIcon = new ImageIcon(imgScale);
-           image4.setIcon(scaledIcon);
+//         ImageIcon icon = new ImageIcon ("D:\\2nd sem\\LED\\images\\seller.png");
+//           Image img= icon.getImage();
+//           Image imgScale = img.getScaledInstance (image4.getWidth(),image4.getHeight(),Image.SCALE_SMOOTH);
+//           ImageIcon scaledIcon = new ImageIcon(imgScale);
+//           image4.setIcon(scaledIcon);
     }//GEN-LAST:event_image4AncestorAdded
 
     private void bttnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnlogoutActionPerformed
@@ -407,9 +405,7 @@ public class newstaff extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tablestaffAncestorAdded
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public StaffModel getUser() {
         int staffid = Integer.parseInt(txtstaffid.getText());
         model = new StaffModel(staffid, txtstaffname.getText(), txtposition.getText(), combogender.getSelectedItem().toString());

@@ -56,7 +56,6 @@ LoginModel model;
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("BIG MART");
 
-        image1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_1.png"))); // NOI18N
         image1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 image1AncestorAdded(evt);
@@ -256,11 +255,7 @@ LoginModel model;
 
     private void image1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_image1AncestorAdded
  
-//        ImageIcon icon = new ImageIcon ("D:\\2nd sem\\LED\\images\\icon.png");
-//        Image img= icon.getImage();
-//        Image imgScale = img.getScaledInstance (image1.getWidth(),image1.getHeight(),Image.SCALE_SMOOTH);
-//        ImageIcon scaledIcon = new ImageIcon(imgScale);
-//        image1.setIcon(scaledIcon);
+
     }//GEN-LAST:event_image1AncestorAdded
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
@@ -272,9 +267,7 @@ LoginModel model;
         String st = comborole.getSelectedItem().toString();
         if(st.equals("Manager"))
         {
-            ManageProduct mp = new ManageProduct();
-            mp.setVisible(true);
-            this.dispose();
+          
         }
         if (st.equals("Seller"))
         {
@@ -358,8 +351,6 @@ public LoginModel getUser()
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
 
-    private void Resetpassword() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }
    

@@ -1,118 +1,114 @@
 package controller;
 
- 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.table.DefaultTableModel;
-import model.StaffModel;
-import DAO.staffDAO;
 import javax.swing.JOptionPane;
-import view.newstaff;
+import javax.swing.table.DefaultTableModel;
+import model.ProductModel;
+import DAO.productDAO;
+import view.ManageProduct;
 
- 
-
-public class StaffController {
-    private StaffModel model;
-    private newstaff view;
-    private staffDAO dao;
-
-    public StaffController(newstaff view) {
+public class productController {
+    private ProductModel model;
+    private ManageProduct view;
+    private productDAO dao;
+    
+    public productController(ManageProduct view) {
         this.view = view;
-        this.dao = new staffDAO();
-
-        view.addstaffListener(new staffListener());
+        this.dao = new productDAO();
+        
+        view.addcategoryListener(new productListener());
         view.adddeleteListener(new deleteListener());
         view.addupdateListener(new updateListener());
         view.addviewListener(new viewListener());
     }
-
-    class staffListener implements ActionListener {
+    
+    class productListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 model = view.getUser();
-                addstaff(model);
+                addproduct(model);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-
-        public void addstaff(StaffModel model) {
+        
+        public void addproduct(ProductModel model) {
             boolean success = dao.add(model);
             if (success) {
-                System.out.println("Staff added successfully.");
-                JOptionPane.showMessageDialog(null, " Staff added successfully. ");
+                System.out.println("product added successfully.");
+                JOptionPane.showMessageDialog(null, "product added successfully.");
             } else {
-                System.out.println("Failed to add Staff.");
-                JOptionPane.showMessageDialog(null, " Failed to add Staff. ");
+                System.out.println("Failed to add product.");
+                JOptionPane.showMessageDialog(null, "Failed to add product.");
             }
         }
     }
-
+        
     class deleteListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 model = view.getUser();
-                deletestaff(model);
+                deleteproduct(model);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-
-        public void deletestaff(StaffModel model) {
+        
+        public void deleteproduct(ProductModel model) {
             try {
                 boolean success = dao.delete(model);
                 if (success) {
-                    System.out.println("Staff deleted successfully.");
-                    JOptionPane.showMessageDialog(null, " Staff deleted successfully. ");
+                    System.out.println("delete Successfully");
+                    JOptionPane.showMessageDialog(null, "delete Successfully");
                 } else {
-                    System.out.println("Failed to delete Staff.");
-                    JOptionPane.showMessageDialog(null, " Failed to delete Staff. ");
+                    System.out.println("Failed to delete product.");
+                    JOptionPane.showMessageDialog(null, " Failed to delete product ");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-
+    
     class updateListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 model = view.getUser();
-                updateStaff(model);
+                updateproduct(model);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-
-        public void updateStaff(StaffModel model) {
+        
+        public void updateproduct(ProductModel model) {
             boolean success = dao.update(model);
             if (success) {
-                System.out.println("Staff updated successfully.");
-                JOptionPane.showMessageDialog(null, " Staff updated successfully. ");
+                System.out.println("product updated successfully.");
+                JOptionPane.showMessageDialog(null, " product update ");
             } else {
-                System.out.println("Failed to update Staff.");
-                JOptionPane.showMessageDialog(null, " Failed to update Staff. ");
+                System.out.println("Failed to update product.");
+                JOptionPane.showMessageDialog(null, " Failed to update product ");
             }
         }
     }
-
+    
     class viewListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                viewstaff();
+                viewproduct();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-
-       public void viewstaff() {
+        
+        public void viewproduct() {
             try {
-                DefaultTableModel tableModel = dao.getstaffTableModel();
+                DefaultTableModel tableModel = dao.getproductTableModel();
                 view.setTableModel(tableModel);
             } catch (Exception e) {
                 e.printStackTrace();

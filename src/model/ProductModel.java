@@ -6,10 +6,11 @@ package model;
 
 
 public class ProductModel {
-    String  productname,category,quantity;
+    String  productname,category;
 
-    int productid,price;
-    public ProductModel(int productid, String productname, String category,String quantity, int price)
+    int productid,quantity;
+    double price;
+    public ProductModel(int productid, String productname, String category, int quantity, double price)
     {
         this.productid=productid;
         this.productname=productname;
@@ -42,19 +43,19 @@ public class ProductModel {
         this.category = category;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
