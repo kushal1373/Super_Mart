@@ -259,7 +259,7 @@ public class RegistrationView extends javax.swing.JFrame {
 
     private void signupbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupbtnActionPerformed
        
-    RegisterController r = new RegisterController(this);
+    RegistrationController r = new RegistrationController(this);
         
            
 //        setVisible(false);

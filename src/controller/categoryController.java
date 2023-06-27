@@ -7,12 +7,12 @@ import model.categoryModel;
 import DAO.categoryDAO;
 import view.categoryView;
 
-public class categoryController {
+public class categorycontroller {
     private categoryModel model;
     private categoryView view;
     private categoryDAO dao;
     
-    public categoryController(categoryView view) {
+    public categorycontroller(categoryView view) {
         this.view = view;
         this.dao = new categoryDAO();
         

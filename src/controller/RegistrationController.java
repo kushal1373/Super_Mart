@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
 import model.*;
 import view.*;
 
-public class RegisterController {
+public class RegistrationController {
     RegistrationModel model;
     RegistrationView view;
     ResultSet rs;
     PreparedStatement pst = null;
 
-    public RegisterController(RegistrationView view) {
+    public RegistrationController(RegistrationView view) {
         this.view = view;
         new RegisterListener().actionPerformed();
     }
