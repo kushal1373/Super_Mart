@@ -19,12 +19,12 @@ public class RegisterController {
 
     public RegisterController(RegistrationView view) {
         this.view = view;
-        view.addRegistrationListener(new RegisterListener());
+        new RegisterListener().actionPerformed();
     }
 
-    class RegisterListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class RegisterListener {
+        
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 if (model.getUsername().isEmpty() || model.getFname().isEmpty() || model.getLname().isEmpty()

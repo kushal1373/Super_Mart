@@ -1,7 +1,7 @@
-package model;
+package DAO;
 
 import database.DbConnection;
-
+import model.categoryModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
