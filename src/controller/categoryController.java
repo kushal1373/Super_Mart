@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import model.categoryModel;
-import model.categoryDAO;
+import DAO.categoryDAO;
 import view.categoryView;
 
 public class categoryController {
