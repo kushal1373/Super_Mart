@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class staffDAO extends DbConnection {
 
     public boolean add(StaffModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
              PreparedStatement pst = conn.prepareStatement("INSERT INTO staff (staffid, staffname, position, gender) VALUES (?, ?, ?, ?)")) {
 
             pst.setInt(1, mod.getstaffid());
@@ -31,7 +31,7 @@ public class staffDAO extends DbConnection {
     }
 
     public boolean delete(StaffModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
              PreparedStatement pst = conn.prepareStatement("DELETE FROM staff WHERE staffid = ?")) {
 
             pst.setInt(1, mod.getstaffid());
@@ -46,13 +46,14 @@ public class staffDAO extends DbConnection {
     }
 
     public boolean update(StaffModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
              PreparedStatement pst = conn.prepareStatement("UPDATE staff SET staffname = ?, position = ?, gender = ? WHERE staffid = ?")) {
 
             pst.setString(1, mod.getstaffname());
             pst.setString(2, mod.getposition());
-            pst.setInt(3, mod.getstaffid());
-            pst.setString(4, mod.getgender());
+            pst.setString(3, mod.getgender());
+            pst.setInt(4, mod.getstaffid());
+            
 
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
@@ -66,7 +67,7 @@ public class staffDAO extends DbConnection {
     public DefaultTableModel getstaffTableModel() throws SQLException {
         DefaultTableModel tableModel = new DefaultTableModel();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM staff");
              ResultSet rs = ps.executeQuery()) {
 

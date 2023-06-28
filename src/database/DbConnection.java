@@ -26,7 +26,7 @@ public class DbConnection {
 
             String username = "root";
 
-            String password = "9808640305@Sr";
+            String password = "ajina kaya8860";
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -62,7 +62,7 @@ public class DbConnection {
             System.out.println("There");
             String username = "root";
 
-            String password = "9808640305@Sr";
+            String password = "ajina kaya8860";
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 

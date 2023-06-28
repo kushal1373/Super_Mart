@@ -56,7 +56,6 @@ LoginModel model;
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("BIG MART");
 
-        image1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_1.png"))); // NOI18N
         image1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 image1AncestorAdded(evt);

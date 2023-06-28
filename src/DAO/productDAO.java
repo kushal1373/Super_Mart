@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class productDAO extends DbConnection {
 
     public boolean add(ProductModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
              PreparedStatement pst = conn.prepareStatement("INSERT INTO product (productid, productname, category, quantity, price) VALUES (?, ?, ?, ?, ?)")) {
 
             pst.setInt(1, mod.getProductid());
@@ -31,7 +31,7 @@ public class productDAO extends DbConnection {
     }
 
     public boolean delete(ProductModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
              PreparedStatement pst = conn.prepareStatement("DELETE FROM product WHERE productid = ?")) {
 
             pst.setInt(1, mod.getProductid());
@@ -46,7 +46,7 @@ public class productDAO extends DbConnection {
     }
 
     public boolean update(ProductModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
              PreparedStatement pst = conn.prepareStatement("UPDATE product SET productname = ?, category = ?, quantity = ?, price = ? WHERE productid = ?")) {
 
             pst.setString(1, mod.getProductname());
@@ -67,7 +67,7 @@ public class productDAO extends DbConnection {
     public DefaultTableModel getproductTableModel() throws SQLException {
         DefaultTableModel tableModel = new DefaultTableModel();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM product");
              ResultSet rs = ps.executeQuery()) {
 

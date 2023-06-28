@@ -88,7 +88,7 @@ public class StaffController {
             boolean success = dao.update(model);
             if (success) {
                 System.out.println("Staff updated successfully.");
-                JOptionPane.showMessageDialog(null, " product staff ");
+                JOptionPane.showMessageDialog(null, "  staff product updated ");
                 } else {
                     System.out.println("Failed to update staff.");
                     JOptionPane.showMessageDialog(null, " Failed to update staff ");
