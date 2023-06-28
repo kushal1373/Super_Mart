@@ -54,8 +54,7 @@ public class RegistrationController {
     public boolean checkUser(RegistrationModel user) throws Exception {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root",
-                    "ajina kaya8860");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
             String sql = "INSERT INTO register (username, password, fname, lname, gender, email, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
             pst = conn.prepareStatement(sql);
             pst.setString(1, user.getUsername());
@@ -79,7 +78,7 @@ public class RegistrationController {
 
     public boolean isUsernameUnique(String username) throws SQLException {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root",
-                "ajina kaya8860");
+                "9808640305@Sr");
                 PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM register WHERE username = ?")) {
             statement.setString(1, username);
             try (ResultSet resultSet = statement.executeQuery()) {

@@ -4,9 +4,14 @@
  */
 package view;
 
+import controller.StaffController;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.StaffModel;
 import view.LoginView;
 import view.ManageProduct;
 
@@ -16,13 +21,14 @@ import view.ManageProduct;
  */
 public class newstaff extends javax.swing.JFrame {
 
+    private StaffModel model;
+
     /**
      * Creates new form newstaff
      */
     
     public newstaff() {
         initComponents();
-//        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -149,6 +155,15 @@ public class newstaff extends javax.swing.JFrame {
                 "STAFF I'D", "STAFF NAME ", "POSITION", "GENDER"
             }
         ));
+        tablestaff.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                tablestaffAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(tablestaff);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -327,26 +342,32 @@ public class newstaff extends javax.swing.JFrame {
 
     private void txtstaffidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstaffidActionPerformed
         // TODO add your handling code here:
+        StaffController c = new StaffController(this);
     }//GEN-LAST:event_txtstaffidActionPerformed
 
     private void txtstaffnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstaffnameActionPerformed
         // TODO add your handling code here:
+        StaffController c = new StaffController(this);
     }//GEN-LAST:event_txtstaffnameActionPerformed
 
     private void txtpositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpositionActionPerformed
         // TODO add your handling code here:
+        StaffController c = new StaffController(this);
     }//GEN-LAST:event_txtpositionActionPerformed
 
     private void bttnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnaddActionPerformed
         // TODO add your handling code here:
+        StaffController c = new StaffController(this);
     }//GEN-LAST:event_bttnaddActionPerformed
 
     private void bttnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnupdateActionPerformed
         // TODO add your handling code here:
+        StaffController c = new StaffController(this);
     }//GEN-LAST:event_bttnupdateActionPerformed
 
     private void bttnviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnviewActionPerformed
         // TODO add your handling code here:
+        StaffController c = new StaffController(this);
     }//GEN-LAST:event_bttnviewActionPerformed
 
     private void bttnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnbackActionPerformed
@@ -379,11 +400,40 @@ public class newstaff extends javax.swing.JFrame {
 
     private void bttndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttndeleteActionPerformed
         // TODO add your handling code here:
+        StaffController c = new StaffController(this);
     }//GEN-LAST:event_bttndeleteActionPerformed
+
+    private void tablestaffAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablestaffAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablestaffAncestorAdded
 
     /**
      * @param args the command line arguments
      */
+    public StaffModel getUser() {
+        int staffid = Integer.parseInt(txtstaffid.getText());
+        model = new StaffModel(staffid, txtstaffname.getText(), txtposition.getText(), combogender.getSelectedItem().toString());
+        return model;
+    }
+
+    public void setMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
+    }
+ public void addstaffListener(ActionListener log) {
+        bttnadd.addActionListener(log);
+
+    }
+   public void adddeleteListener(ActionListener log) {
+        bttndelete.addActionListener(log);
+
+   }
+   public void addupdateListener(ActionListener log) {
+         bttnupdate.addActionListener(log);
+   }
+   public void addviewListener(ActionListener log) {
+         bttnview.addActionListener(log);
+   }
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -439,4 +489,10 @@ public class newstaff extends javax.swing.JFrame {
     private javax.swing.JTextField txtstaffid;
     private javax.swing.JTextField txtstaffname;
     // End of variables declaration//GEN-END:variables
+
+public void setTableModel(DefaultTableModel Model) {
+    // Set the table model to your view's table
+    tablestaff.setModel(Model);
+
+    }
 }

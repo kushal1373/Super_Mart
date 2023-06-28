@@ -2,224 +2,169 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import java.sql.*;
-import java.awt.print.PrinterException;
-import java.text.MessageFormat;
-import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JTable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
-import model.StaffDAO;
-import model.categoryModel;
-import view.categoryView;
+import model.StaffModel;
+import model.staffDAO;
+import view.newstaff;
 
-/**
- *
- * author User
- */
-public class StaffController implements ActionListener {
-    private StaffModel mod;
-    private StaffDAO modDAO;
-    private newstaffView stupage;
-    private JTable jTable;
-    private JButton bttnadd;
-    private JButton bttndelete;
-    private JButton bttnsearch;
-    private JButton bttnview;
-//    private JButton refreshBtn;
+public class StaffController {
+    private StaffModel model;
+    private newstaff view;
+    private staffDAO dao;
+  
     
-    
-    
-
-    
-    public StaffController(StaffModel mod, StaffDAO modDAO, newstaff stupage)
-    {
-        this.mod = mod;
-        this.modDAO = modDAO;
-        this.stupage = stupage;
-        this.bttnadd = bttnadd;
-        this.txtstaffid=txtstaffid;
-       
+    public StaffController(newstaff view) {
+        this.view = view;
+        this.dao = new staffDAO();
         
+        view.addstaffListener(new StaffController.staffListener());
+        view.adddeleteListener(new StaffController.deleteListener());
+        view.addupdateListener(new StaffController.updateListener());
+        view.addviewListener(new StaffController.viewListener());
         
-        this.btnPrint.addActionListener(this);
-        
-        
-        this.stupage.bttnadd.addActionListener(this);
-        this.stupage.bttnupdate.addActionListener(this);
-        this.stupage.bttndelete.addActionListener(this);
-        this.stupage.bttnview.addActionListener(this);
-        
-
-        this.jTable = stupage.jTable;
-
     }
+      
     
-    public void start()
-    {
-        stupage.setTitle("Student Registration Page");
-        stupage.setLocationRelativeTo(null);
-        stupage.txtstaffid.setVisible(true);
-        refreshTable();
-    }
-    
-    @Override
-    
-    public void actionPerformed(ActionEvent e)
-    {
-        if(e.getSource() == bttnadd)
-        {
-            if (validateFields()) {
-//                mod.setCategoryId(stupage.txtcategoryId.getText());
-                mod.setstaffname(stupage.txtstaffname.getText());
-                mod.setposition(stupage.txtposition.getText());
-                
-                if(modDAO.add(mod))
-                {
-                    JOptionPane.showMessageDialog(null, "Added Successfully");
-                    clear();
-                    refreshTable();
-                    
-                } else {
-                    JOptionPane.showMessageDialog(null, "Cannot be Added");
-                    clear();
-                }   
-            }
-            
-        }
-        
-        if(e.getSource() == stupage.bttnupdate)
-        {
-            if (validateFields()) {
-                mod.setstaffid(Integer.parseInt(stupage.txtstaffid.getText()));
-                mod.setstaffname(stupage.txtstaffname.getText());
-                mod.setposition(stupage.txtstaffposition.getText());
-                
-                
-                
-                if(modDAO.update(mod))
-                {
-                    JOptionPane.showMessageDialog(null, "Updated Successfully");
-                    clear();
-                    refreshTable();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error in Updating");
-                    clear();
-                }   
-            }
-            
-        }
-        
-        if(e.getSource() == stupage.bttndelete)
-        {
-            if (validateIDField()) {
-                mod.setstaffid(Integer.parseInt(stupage.txtstaffid.getText()));
-                
-                
-                if(modDAO.delete(mod))
-                {
-                    JOptionPane.showMessageDialog(null, "Deleted Successfully");
-                    clear();
-                    refreshTable();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error in Deleting");
-                    clear();
-                    
-                }   
-            }
-            
-        }
-        
-        if(e.getSource() == stupage.btnSearch)
-        {
-            if (validateIDField()) {
-                mod.setStudent_id(Integer.parseInt(stupage.txtID.getText())); 
-                
-                if(modDAO.search(mod))
-                {
-                    stupage.txtID.setText(String.valueOf(mod.getStudent_id()));
-                    stupage.txtAddress.setText(mod.getAddress());
-                    stupage.txtAge.setText(String.valueOf(mod.getAge()));
-                    stupage.txtEmail.setText(mod.getEmail());
-                    stupage.txtFirstName.setText(mod.getFirst_name());
-                    stupage.txtLastName.setText(mod.getLast_name());
-                    stupage.txtPhoneNumber.setText(mod.getPhone_number());
-                   
-                } else {
-                    JOptionPane.showMessageDialog(null, "No Record Found");
-                    clear();
-                }   
-            }
-            
-        }
-
-        if (e.getSource() == btnPrint) {
-            MessageFormat header = new MessageFormat("Students Information");
-            MessageFormat footer = new MessageFormat("Page {0,number,integer}");
-
+        class staffListener implements ActionListener {
+             @Override
+        public void actionPerformed(ActionEvent e) {
             try {
-                jTable.print(JTable.PrintMode.NORMAL, header, footer);
-            } catch (PrinterException ex) {
-                System.out.println(ex.getMessage());
+                model =view.getUser();
+                if (addstaff(model)) {
+                    view.setMessage("Success");
+                } else {
+                    view.setMessage("Error");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
         
-        if(e.getSource() == stupage.bttndelete){
-            clear();
-        }
-        
-        if (e.getSource() == stupage.btnRefresh) {
-            refreshTable();
+        public boolean addstaff(StaffModel staff) throws Exception {
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+                 PreparedStatement pst = conn.prepareStatement("INSERT INTO staff (staffid, staffname, position, gender) VALUES (?, ?, ?, ?)")) {
+
+                pst.setInt(1, staff.getstaffid());
+                pst.setString(2, staff.getstaffname());
+                pst.setString(3, staff.getposition());
+                pst.setString(4, staff.getgender());
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                throw e;
+            }
         }
     }
     
-    public void clear()
-    {
-        stupage.txtstaffid.setText(null);
-        stupage.txtstaffname.setText(null);
-        stupage.txtpositon.setText(null);
+    class deleteListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                model = view.getUser();
+                if (deletestaff(model)) {
+                    view.setMessage("Success to delete");
+                } else {
+                    view.setMessage("Error");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
         
-    }        
-    
-    private void refreshTable() {
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.setRowCount(0); // Clear existing table data
+        public boolean deletestaff(StaffModel staff) throws Exception {
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+                 PreparedStatement pst = conn.prepareStatement("DELETE FROM staff WHERE staffid = ?")) {
 
-        // Retrieve all students from the database
-        StaffDAO studentDAO = new StaffDAO();
-        List<StaffModel> students = studentDAO.getAllStaff(); 
+                pst.setInt(1, staff.getstaffid());
 
-        // Iterate through the students and add them to the table
-        for (StaffModel student : students) {
-            Object[] row = {student.getstaffid(), student.getstaffname(), student.getposition()};
-            model.addRow(row);
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                throw e;
+            }
         }
-    }    
-    
-    private boolean validateFields() {
-        if (stupage.txtstaffname.getText().isEmpty() || stupage.txtposition.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please fill in all the fields.");
-            return false;
-        }
-        
-        try {
-            Integer.parseInt(stupage.txtstaffid.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "StaffId must be an integer.");
-            return false;
-        }
-        
-        
-        return true;
     }
     
-    private boolean validateIDField() {
-        if (stupage.txtstaffid.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter a Staff ID.");
-            return false;
+    class updateListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                model = view.getUser();
+                if (updatestaff(model)) {
+                    view.setMessage("Success to update");
+                } else {
+                    view.setMessage("Error");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         
-        return true;
+        public boolean updatestaff(StaffModel staff) throws Exception {
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "908640305@Sr");
+                 PreparedStatement pst = conn.prepareStatement("UPDATE staff SET staffame = ?, position = ?, gender = ?, WHERE staffid = ?")) {
+
+                pst.setString(1, staff.getstaffname());
+                pst.setString(2, staff.getposition());
+                pst.setInt(3, staff.getstaffid());
+                pst.setString(4,staff.getgender());
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                throw e;
+            }
+        }
+    }
+    
+    class viewListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                viewStaff();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+            
+        public void viewStaff() throws Exception {
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+         PreparedStatement pst = conn.prepareStatement("SELECT * FROM staff");
+         ResultSet rs = pst.executeQuery()) {
+        
+        // Create a table model to hold the category data
+        DefaultTableModel tableModel = new DefaultTableModel();
+        
+        // Add column names to the table model
+        tableModel.addColumn("Staff ID");
+        tableModel.addColumn("Staff Name");
+        tableModel.addColumn("Position");
+        tableModel.addColumn("Gender");
+        
+        // Process the result set and add the data to the table model
+        while (rs.next()) {
+            int staffid = rs.getInt("staffid");
+            String staffname = rs.getString("staffname");
+            String position = rs.getString("position");
+            String gender = rs.getString("gender");
+            
+            // Add the category data to the table model as a new row
+            tableModel.addRow(new Object[] {staffid, staffname, position, gender});
+        }
+        
+        // Set the table model to the view's table
+        view.setTableModel(tableModel);
+    } catch (SQLException e) {
+        throw e;
     }
 }
+
+        }
+    }
+

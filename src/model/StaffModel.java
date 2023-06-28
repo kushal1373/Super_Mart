@@ -9,16 +9,17 @@ package model;
  * @author Acer
  */
 public class StaffModel {
-    String  staffname, position;
+    String  staffname, position, gender;
     int staffid;
-    public StaffModel(int staffid, String staffname, String position)
+    public StaffModel(int staffid, String staffname, String position, String gender)
     {
         this.staffid=staffid;
         this.staffname =staffname;
         this.position=position;  
+        this.gender= gender;
     } 
 
-    public int getCategoryId() {
+    public int getstaffid() {
         return staffid;
     }
 
@@ -40,5 +41,13 @@ public class StaffModel {
 
     public void setposition(String position) {
         this.position = position;
+    }
+    
+    public String getgender() {
+        return gender;
+    }
+
+    public void setgender(String gender) {
+        this.gender = gender;
     }
 }
