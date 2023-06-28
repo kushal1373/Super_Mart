@@ -1,8 +1,10 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+* Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+* Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+*/
 package controller;
+
+ 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,21 +22,23 @@ public class LoginController {
     public LoginController(LoginView view)
     {
         this.view=view;
-        
+
        new LoginListener().actionPerformed();
-        
-        
-        
+
+
+
     }
     class LoginListener 
     {
+
+ 
 
        
         public void actionPerformed() {
             try
             {
                 model=view.getUser();
-          
+
                 if(model.getUsername().isEmpty() || model.getPassword().isEmpty()){
                   JOptionPane.showMessageDialog(null,"This Box are Empty.", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
@@ -61,8 +65,10 @@ public class LoginController {
             }
             catch(Exception e1)
             {
-                
+
             }
+
+ 
 
         }
         public boolean checkUser(LoginModel user) throws Exception
@@ -79,20 +85,19 @@ public class LoginController {
                  return true;
              }
              conn.close();
-            
-          
+
+
           }
           catch(SQLException e2)
           {
               System.out.println(e2.getMessage());
           }         
-            
+
             return false;
         }
-        
-        
-        
-    }
-    
-}
 
+
+
+    }
+
+}

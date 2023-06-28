@@ -44,7 +44,7 @@ LoginModel model;
         roleloginlabel = new javax.swing.JLabel();
         comborole = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        bttnreset = new javax.swing.JButton();
+        bttnforgotpassword = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 102, 0));
@@ -121,13 +121,12 @@ LoginModel model;
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setText("Forgot Password? ");
 
-        bttnreset.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        bttnreset.setText("Reset");
-        bttnreset.addActionListener(new java.awt.event.ActionListener() {
+        bttnforgotpassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bttnforgotpassword.setText("Forgot Password?");
+        bttnforgotpassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnresetActionPerformed(evt);
+                bttnforgotpasswordActionPerformed(evt);
             }
         });
 
@@ -158,12 +157,12 @@ LoginModel model;
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bttnreset))
+                                .addComponent(bttnforgotpassword))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnsignup)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnlogin)))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +188,7 @@ LoginModel model;
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(bttnreset, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bttnforgotpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56))
         );
 
@@ -214,7 +213,7 @@ LoginModel model;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
@@ -244,7 +243,8 @@ LoginModel model;
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         // TODO add your handling code here:
-       LoginController l = new LoginController(this);        
+       LoginController l = new LoginController(this); 
+        System.out.println("Test");
     }//GEN-LAST:event_btnloginActionPerformed
 
     private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed
@@ -277,13 +277,13 @@ LoginModel model;
         }
     }//GEN-LAST:event_comboroleActionPerformed
 
-    private void bttnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnresetActionPerformed
+    private void bttnforgotpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnforgotpasswordActionPerformed
         // TODO add your handling code here:
         setVisible(false);
         ForgetPassword a= new ForgetPassword();
         a.setVisible(true);
         
-    }//GEN-LAST:event_bttnresetActionPerformed
+    }//GEN-LAST:event_bttnforgotpasswordActionPerformed
 public LoginModel getUser()
     {
         model = new LoginModel(txtusername.getText(),txtpassword.getText(),comborole.getSelectedItem().toString());
@@ -336,7 +336,7 @@ public LoginModel getUser()
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnlogin;
     private javax.swing.JButton btnsignup;
-    private javax.swing.JButton bttnreset;
+    private javax.swing.JButton bttnforgotpassword;
     private javax.swing.JComboBox<String> comborole;
     private javax.swing.JLabel image1;
     private javax.swing.JLabel jLabel1;
