@@ -349,16 +349,16 @@ public class ManageProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_txtpriceActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
- productController c = new productController(this);
+ productController c = new productController(this,"add");
           
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        productController c = new productController(this);
+        productController c = new productController(this,"update");
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void viewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewbtnActionPerformed
-        productController c = new productController(this);                                   
+        productController c = new productController(this,"view");                                   
 
     }//GEN-LAST:event_viewbtnActionPerformed
 
@@ -380,7 +380,7 @@ public class ManageProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8AncestorAdded
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        productController c = new productController(this);        
+        productController c = new productController(this,"delete");        
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void txtproductIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtproductIdActionPerformed
