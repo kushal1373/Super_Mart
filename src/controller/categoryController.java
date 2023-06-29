@@ -13,19 +13,26 @@ public class categoryController {
     private categoryView view;
     private categoryDAO dao;
     
-    public categoryController(categoryView view) {
+    public categoryController(categoryView view, String button) {
         this.view = view;
         this.dao = new categoryDAO();
         
-        view.addcategoryListener(new categoryListener());
-        view.adddeleteListener(new deleteListener());
-        view.addupdateListener(new updateListener());
-        view.addviewListener(new viewListener());
+                if (button.equals("add")){
+            new categoryController.categoryListener().actionPerformed();
+        }else if (button.equals("delete")){
+            new categoryController.deleteListener().actionPerformed();
+        }
+        else if (button.equals("update")){
+            new categoryController.updateListener().actionPerformed();
+        }
+        else if (button.equals("view")){
+            new categoryController.viewListener().actionPerformed();
+        }
+        
     }
     
-    class categoryListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class categoryListener {
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 addCategory(model);
@@ -46,9 +53,8 @@ public class categoryController {
         }
     }
         
-    class deleteListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class deleteListener{
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 deleteCategory(model);
@@ -73,9 +79,8 @@ public class categoryController {
         }
     }
     
-    class updateListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class updateListener{
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 updateCategory(model);
@@ -96,9 +101,8 @@ public class categoryController {
         }
     }
     
-    class viewListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class viewListener{
+        public void actionPerformed() {
             try {
                 viewCategories();
             } catch (Exception ex) {

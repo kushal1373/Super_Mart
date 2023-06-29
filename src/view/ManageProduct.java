@@ -69,7 +69,7 @@ public class ManageProduct extends javax.swing.JFrame {
         setTitle("Manage Product");
         setResizable(false);
 
-        jPanel2.setBackground(new java.awt.Color(255, 102, 0));
+        jPanel2.setBackground(new java.awt.Color(0, 51, 51));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -352,7 +352,10 @@ public class ManageProduct extends javax.swing.JFrame {
 
         productController c = new productController(this,"add");
 
+<<<<<<< HEAD
           
+=======
+>>>>>>> 6b055ed109ed85d01e5a26c12841eca34912e2c5
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
