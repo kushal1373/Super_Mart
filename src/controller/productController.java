@@ -17,7 +17,7 @@ public class productController {
         this.view = view;
         this.dao = new productDAO();
         
-                if (button.equals("add")){
+               if (button.equals("add")){
             new productController.productListener().actionPerformed();
         }else if (button.equals("delete")){
             new productController.deleteListener().actionPerformed();
