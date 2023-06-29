@@ -50,7 +50,7 @@ LoginModel model;
         setBackground(new java.awt.Color(255, 102, 0));
         setResizable(false);
 
-        jPanel2.setBackground(new java.awt.Color(255, 102, 0));
+        jPanel2.setBackground(new java.awt.Color(0, 51, 51));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -279,7 +279,7 @@ LoginModel model;
     private void bttnforgotpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnforgotpasswordActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        ForgetPassword a= new ForgetPassword();
+        forgetpassword a= new forgetpassword();
         a.setVisible(true);
         
     }//GEN-LAST:event_bttnforgotpasswordActionPerformed
