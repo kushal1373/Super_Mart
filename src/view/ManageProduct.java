@@ -4,38 +4,29 @@
  */
 package view;
 
-import database.DbConnection;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import java.awt.print.PrinterException;
-import java.sql.*;
-import java.text.MessageFormat;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import view.LoginView;
-import view.LoginView;
-//import view.newstaff;
 
-/**
- *
- 
- */
+import java.sql.*;
+import controller.*;
+import database.DbConnection;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JComboBox;
+import model.*;
+
 public class ManageProduct extends javax.swing.JFrame {
-      Connection conn;
-      Statement stmt;
-      ResultSet rs;
-      PreparedStatement pst;
-      DefaultTableModel dtm;
-      DbConnection dbConnection = new DbConnection();
-      
+    ProductModel model;
+    DefaultTableModel dtm =null;
+    Connection conn = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+   DbConnection dbConnection = new DbConnection();
+
     /**
-     * Creates new form Homepage
+     * Creates new form categoryView
      */
     public ManageProduct() {
         initComponents();
-//        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -53,21 +44,21 @@ public class ManageProduct extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtproductid = new javax.swing.JTextField();
+        txtproductId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtproductname = new javax.swing.JTextField();
+        txtproductName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtcategory = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtquantity = new javax.swing.JTextField();
         txtprice = new javax.swing.JTextField();
-        ADD = new javax.swing.JToggleButton();
-        Edit = new javax.swing.JToggleButton();
-        delete = new javax.swing.JToggleButton();
-        viewtable = new javax.swing.JToggleButton();
+        addBtn = new javax.swing.JToggleButton();
+        updateBtn = new javax.swing.JToggleButton();
+        deleteBtn = new javax.swing.JToggleButton();
+        viewbtn = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableModel = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         bttnlogout = new javax.swing.JButton();
@@ -86,11 +77,11 @@ public class ManageProduct extends javax.swing.JFrame {
         jLabel1.setText("MANAGE PRODUCT");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("PRODUCT I'D ");
+        jLabel2.setText("PRODUCT ID ");
 
-        txtproductid.addActionListener(new java.awt.event.ActionListener() {
+        txtproductId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtproductidActionPerformed(evt);
+                txtproductIdActionPerformed(evt);
             }
         });
 
@@ -100,8 +91,8 @@ public class ManageProduct extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("CATEGORY");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DARIY", "BAKERY", "MEAT", "BEVRAGE", "FRUITS", "VEGETABLE", "SNACKS", "HOUSEHOLD", " " }));
+        txtcategory.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtcategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DARIY", "BAKERY", "MEAT", "BEVRAGE", "FRUITS", "VEGETABLE", "SNACKS", "HOUSEHOLD", " " }));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("QUANTITY");
@@ -115,45 +106,45 @@ public class ManageProduct extends javax.swing.JFrame {
             }
         });
 
-        ADD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ADD.setText("ADD");
-        ADD.addMouseListener(new java.awt.event.MouseAdapter() {
+        addBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        addBtn.setText("ADD");
+        addBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ADDMouseClicked(evt);
+                addBtnMouseClicked(evt);
             }
         });
-        ADD.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ADDActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
-        Edit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Edit.setText("EDIT");
-        Edit.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        updateBtn.setText("UPDATE");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
 
-        delete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        delete.setText("DELETE");
-        delete.addActionListener(new java.awt.event.ActionListener() {
+        deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        deleteBtn.setText("DELETE");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteActionPerformed(evt);
+                deleteBtnActionPerformed(evt);
             }
         });
 
-        viewtable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        viewtable.setText("View");
-        viewtable.addActionListener(new java.awt.event.ActionListener() {
+        viewbtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        viewbtn.setText("View");
+        viewbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewtableActionPerformed(evt);
+                viewbtnActionPerformed(evt);
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableModel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tableModel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -165,7 +156,7 @@ public class ManageProduct extends javax.swing.JFrame {
                 "PRODUCT ID", "PRODUCT NAME ", "CATEGORY", "PRICE ", "QUANTITY"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableModel);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("PRODUCTS  LIST");
@@ -181,11 +172,11 @@ public class ManageProduct extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(57, 57, 57)
-                                .addComponent(Edit, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(52, 52, 52)
-                                .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(50, 50, 50))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,15 +185,15 @@ public class ManageProduct extends javax.swing.JFrame {
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(30, 30, 30)
-                                        .addComponent(txtproductid, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtproductId, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel3)
                                             .addComponent(jLabel4))
                                         .addGap(30, 30, 30)
                                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtproductname, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(txtcategory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtproductName, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(148, 148, 148)
                                 .addComponent(jLabel5))
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -213,7 +204,7 @@ public class ManageProduct extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtquantity, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                         .addComponent(txtprice))
-                    .addComponent(viewtable, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(viewbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(135, 135, 135))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +224,7 @@ public class ManageProduct extends javax.swing.JFrame {
                 .addGap(52, 52, 52)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtproductid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtproductId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
@@ -242,17 +233,17 @@ public class ManageProduct extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6)
-                        .addComponent(txtproductname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtproductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Edit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewtable, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
@@ -271,7 +262,7 @@ public class ManageProduct extends javax.swing.JFrame {
         });
 
         bttnseller.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bttnseller.setText("BACK");
+        bttnseller.setText("SELLER");
         bttnseller.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnsellerActionPerformed(evt);
@@ -357,64 +348,19 @@ public class ManageProduct extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtpriceActionPerformed
 
-    private void ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDActionPerformed
-//        conn = dbConnection.dbConnect();
-//       try 
-//       {
-//            stmt = conn.createStatement();
-//            String sql="insert into project.product(productid,productname,productcategory,quanity,price)values("+txtproductname.getText()+","+txtquantity.getText()+","+txtprice.getText()+","+jComboBox1.getSelectedItem()+")";
-//            stmt.execute(sql);
-//            JOptionPane.showMessageDialog(this,"Data inserted ","this",JOptionPane.INFORMATION_MESSAGE);
-//       }
-//       catch(Exception e)
-//       {
-//           System.out.println(e.getMessage());
-//       }
-
-     
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+ productController c = new productController(this);
           
-    }//GEN-LAST:event_ADDActionPerformed
+    }//GEN-LAST:event_addBtnActionPerformed
 
-    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
-        conn = dbConnection.dbConnect();
-        try
-        {
-            stmt= conn.createStatement();
-            String sql="ADD project set productname="+txtproductname.getText()+","+txtquantity.getText()+","+txtprice.getText()+","+jComboBox1.getSelectedItem()+")";
-            stmt.executeUpdate(sql);
-            System.out.println("Data Edit");
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-    }//GEN-LAST:event_EditActionPerformed
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        productController c = new productController(this);
+    }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void viewtableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewtableActionPerformed
-         showData();
-    }
-    public void showData()
-    {
-        dtm=(DefaultTableModel)viewtable.getModel();
-        conn = dbConnection.dbConnect();
-        try
-        {
-            stmt = conn.createStatement();
-            String sql = "select * from product";
-            dtm.setRowCount(0);
-            rs = stmt.executeQuery(sql);
-            while(rs.next())
-            {
-                dtm.addRow(new Object[]{rs.getString("productname"),rs.getString("quanity"),rs.getString("product   category"),rs.getString("price")});
-            }
-        }
-        catch(SQLException e)
-        {
-            System.out.println();
-        }
-                                           
+    private void viewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewbtnActionPerformed
+        productController c = new productController(this);                                   
 
-    }//GEN-LAST:event_viewtableActionPerformed
+    }//GEN-LAST:event_viewbtnActionPerformed
 
     private void bttnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnlogoutActionPerformed
         // TODO add your handling code here:
@@ -424,58 +370,61 @@ public class ManageProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_bttnlogoutActionPerformed
 
     private void bttnsellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsellerActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-        ManagerView mv = new ManagerView();
-        mv.setVisible(true);
+       
     }//GEN-LAST:event_bttnsellerActionPerformed
 
     private void jLabel8AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel8AncestorAdded
-        // TODO add your handling code here:
-//        ImageIcon icon = new ImageIcon ("D:\\2nd sem\\LED\\images\\manager logo.png");
-//           Image img= icon.getImage();
-//           Image imgScale = img.getScaledInstance (jLabel8.getWidth(),jLabel8.getHeight(),Image.SCALE_SMOOTH);
-//           ImageIcon scaledIcon = new ImageIcon(imgScale);
-//           jLabel8.setIcon(scaledIcon);
+        
     }//GEN-LAST:event_jLabel8AncestorAdded
 
-    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        conn = dbConnection.dbConnect();
-        try
-        {
-            stmt = conn.createStatement();
-      //      String sql="delete from product where productid='"+txtsearchfield.getText()+"'";
-       //     stmt.executeUpdate(sql);
-     //       JOptionPane.showMessageDialog(rootPane,"Data Delete","product",JOptionPane.INFORMATION_MESSAGE);
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }           
-    }//GEN-LAST:event_deleteActionPerformed
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        productController c = new productController(this);        
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
-    private void txtproductidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtproductidActionPerformed
+    private void txtproductIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtproductIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtproductidActionPerformed
+    }//GEN-LAST:event_txtproductIdActionPerformed
 
-    private void ADDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADDMouseClicked
-        conn = dbConnection.dbConnect();
-       try 
-       {
-            stmt = conn.createStatement();
-            String sql="insert into project.product(productid,productname,productcategory,quanity,price)values("+txtproductname.getText()+","+txtquantity.getText()+","+txtprice.getText()+","+jComboBox1.getSelectedItem()+")";
-            stmt.execute(sql);
-            JOptionPane.showMessageDialog(this,"Data inserted ","this",JOptionPane.INFORMATION_MESSAGE);
-       }
-       catch(Exception e)
-       {
-           System.out.println(e.getMessage());
-       }
-
+    private void addBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseClicked
+       
      
        
-    }//GEN-LAST:event_ADDMouseClicked
+    }//GEN-LAST:event_addBtnMouseClicked
 
+    public ProductModel getUser() {
+    int productId = Integer.parseInt(txtproductId.getText());
+    String productName = txtproductName.getText();
+    String Category = txtcategory.getSelectedItem().toString();
+    int Quantity = Integer.parseInt(txtquantity.getText());
+    double Price = Double.parseDouble(txtprice.getText());
+
+   model  = new ProductModel(productId, productName, Category, Quantity, Price);
+    return model;
+}
+
+
+
+
+    public void setMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
+    }
+ public void addcategoryListener(ActionListener log) {
+        addBtn.addActionListener(log);
+
+    }
+   public void adddeleteListener(ActionListener log) {
+        deleteBtn.addActionListener(log);
+
+   }
+   public void addupdateListener(ActionListener log) {
+         updateBtn.addActionListener(log);
+   }
+   public void addviewListener(ActionListener log) {
+         viewbtn.addActionListener(log);
+   }
+   
+   
+   
     /**
      * @param args the command line arguments
      */
@@ -506,21 +455,24 @@ public class ManageProduct extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ManageProduct().setVisible(true);
             }
         });
     }
+    public void setTableModel(DefaultTableModel Model) {
+    // Set the table model to your view's table
+  tableModel.setModel(Model);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton ADD;
-    private javax.swing.JToggleButton Edit;
+    private javax.swing.JToggleButton addBtn;
     private javax.swing.JButton bttnlogout;
     private javax.swing.JButton bttnseller;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JToggleButton delete;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JToggleButton deleteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -533,11 +485,14 @@ public class ManageProduct extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableModel;
+    private javax.swing.JComboBox<String> txtcategory;
     private javax.swing.JTextField txtprice;
-    private javax.swing.JTextField txtproductid;
-    private javax.swing.JTextField txtproductname;
+    private javax.swing.JTextField txtproductId;
+    private javax.swing.JTextField txtproductName;
     private javax.swing.JTextField txtquantity;
-    private javax.swing.JToggleButton viewtable;
+    private javax.swing.JToggleButton updateBtn;
+    private javax.swing.JToggleButton viewbtn;
     // End of variables declaration//GEN-END:variables
 }
+

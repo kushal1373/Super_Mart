@@ -206,9 +206,9 @@ public class ManagerView extends javax.swing.JFrame {
 
     private void bttncategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttncategoryActionPerformed
         // TODO add your handling code here:
-//        setVisible(false);
-//        CategoryView r = new CategoryView();
-//        r.setVisible(true);
+        setVisible(false);
+        categoryView r = new categoryView();
+        r.setVisible(true);
     }//GEN-LAST:event_bttncategoryActionPerformed
 
     /**
