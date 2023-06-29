@@ -62,7 +62,7 @@ public class ManageProduct extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         bttnlogout = new javax.swing.JButton();
-        bttnseller = new javax.swing.JButton();
+        bttnback = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -261,11 +261,11 @@ public class ManageProduct extends javax.swing.JFrame {
             }
         });
 
-        bttnseller.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bttnseller.setText("BACK");
-        bttnseller.addActionListener(new java.awt.event.ActionListener() {
+        bttnback.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bttnback.setText("BACK");
+        bttnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnsellerActionPerformed(evt);
+                bttnbackActionPerformed(evt);
             }
         });
 
@@ -287,7 +287,7 @@ public class ManageProduct extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(bttnlogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bttnseller, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bttnback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
@@ -300,7 +300,7 @@ public class ManageProduct extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
-                .addComponent(bttnseller)
+                .addComponent(bttnback)
                 .addGap(38, 38, 38)
                 .addComponent(bttnlogout)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -369,9 +369,11 @@ public class ManageProduct extends javax.swing.JFrame {
         r.setVisible(true);
     }//GEN-LAST:event_bttnlogoutActionPerformed
 
-    private void bttnsellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsellerActionPerformed
-       
-    }//GEN-LAST:event_bttnsellerActionPerformed
+    private void bttnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnbackActionPerformed
+        setVisible(false);
+        ManagerView MV = new ManagerView();
+        MV.setVisible(true);
+    }//GEN-LAST:event_bttnbackActionPerformed
 
     private void jLabel8AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel8AncestorAdded
         
@@ -468,8 +470,8 @@ public class ManageProduct extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton addBtn;
+    private javax.swing.JButton bttnback;
     private javax.swing.JButton bttnlogout;
-    private javax.swing.JButton bttnseller;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JToggleButton deleteBtn;

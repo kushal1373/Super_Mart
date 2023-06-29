@@ -67,6 +67,7 @@ public class categoryDAO extends DbConnection {
         DefaultTableModel tableModel = new DefaultTableModel();
         
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM category");
              ResultSet rs = ps.executeQuery()) {
             

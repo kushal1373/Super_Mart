@@ -51,9 +51,9 @@ public class staffDAO extends DbConnection {
             
             pst.setString(1, mod.getstaffname());
             pst.setString(2, mod.getposition());
-            pst.setInt(4,mod.getstaffid());
             pst.setString(3, mod.getgender());
-
+            pst.setInt(4, mod.getstaffid());
+       
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {

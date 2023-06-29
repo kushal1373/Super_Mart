@@ -7,14 +7,6 @@ package model;
 
 public class categoryModel {
     String  categoryName, description;
-
-//    public String getTableModel() {
-//        return tableModel;
-//    }
-//
-//    public void setTableModel(String tableModel) {
-//        this.tableModel = tableModel;
-//    }
     int categoryId;
     public categoryModel(int categoryId, String categoryName, String description)
     {
