@@ -13,19 +13,26 @@ public class StaffController {
     private newstaff view;
     private staffDAO dao;
     
-    public StaffController(newstaff view) {
+    public StaffController(newstaff view, String button) {
         this.view = view;
         this.dao = new staffDAO();
-        
-        view.addstaffListener(new productListener());
-        view.adddeleteListener(new deleteListener());
-        view.addupdateListener(new updateListener());
-        view.addviewListener(new viewListener());
+
+        if (button.equals("add")){
+            new staffListener().actionPerformed();
+        }else if (button.equals("delete")){
+            new deleteListener().actionPerformed();
+        }
+        else if (button.equals("update")){
+            new updateListener().actionPerformed();
+        }
+        else if (button.equals("view")){
+            new viewListener().actionPerformed();
+        }
     }
     
-    class productListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class staffListener{
+        
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 addstaff(model);
@@ -46,9 +53,9 @@ public class StaffController {
         }
     }
         
-    class deleteListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class deleteListener{
+       
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 deletestaff(model);
@@ -73,9 +80,9 @@ public class StaffController {
         }
     }
     
-    class updateListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class updateListener {
+        
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 updatestaff(model);
@@ -88,7 +95,6 @@ public class StaffController {
             boolean success = dao.update(model);
             if (success) {
                 System.out.println("Staff updated successfully.");
-                JOptionPane.showMessageDialog(null, "  staff product updated ");
                 } else {
                     System.out.println("Failed to update staff.");
                     JOptionPane.showMessageDialog(null, " Failed to update staff ");
@@ -96,9 +102,9 @@ public class StaffController {
         }
     }
     
-    class viewListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class viewListener  {
+        
+        public void actionPerformed() {
             try {
                 viewstaff();
             } catch (Exception ex) {
