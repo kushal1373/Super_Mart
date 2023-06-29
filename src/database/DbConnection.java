@@ -26,7 +26,7 @@ public class DbConnection {
 
             String username = "root";
 
-            String password = "ajina kaya8860";
+            String password = "9808640305@Sr";
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
