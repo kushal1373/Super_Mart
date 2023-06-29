@@ -42,26 +42,27 @@ public class LoginController {
                 if(model.getUsername().isEmpty() || model.getPassword().isEmpty()){
                   JOptionPane.showMessageDialog(null,"This Box are Empty.", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
-                if(checkUser(model))
+                else if(model.getRole().equals("Manager"))
                 {
                     view.setMessage("Login Successfully");
                     ManagerView MV = new ManagerView();
                     MV.show();       
                 }
-                else
-                {
-                    view.setMessage("Invalid Username or Password or Role");  
-                }
-//                if(checkUser(model))
-//                {
-//                    view.setMessage("Login Successfully");
-//                    billingform BF = new billingform();
-//                    BF.show();       
-//                }
 //                else
 //                {
 //                    view.setMessage("Invalid Username or Password or Role");  
 //                }
+//                
+                else if(model.getRole().equals("Seller"))
+                {
+                    view.setMessage("Login Successfully");
+                    billingform BF = new billingform();
+                    BF.show();       
+                }
+                else
+                {
+                    view.setMessage("Invalid Username or Password or Role");  
+                }
             }
             catch(Exception e1)
             {
@@ -74,7 +75,7 @@ public class LoginController {
         public boolean checkUser(LoginModel user) throws Exception
         {
              Class.forName("com.mysql.cj.jdbc.Driver");
-               Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","ajina kaya8860");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","9808640305@Sr");
           String sql="select * from register where username='"+user.getUsername()+"' AND password='"+user.getPassword()+"' AND role ='"+user.getRole()+"'";
           try
           {

@@ -261,7 +261,7 @@ public class categoryView extends javax.swing.JFrame {
     }
 
     public void setMessage(String msg) {
-        JOptionPane.showMessageDialog(this, msg);
+        JOptionPane.showMessageDialog(this, "msg");
     }
  public void addcategoryListener(ActionListener log) {
         addBtn.addActionListener(log);
