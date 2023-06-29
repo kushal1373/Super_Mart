@@ -64,8 +64,9 @@ public class newstaff extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel1.setText("MANAGE  STAFF");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -103,6 +104,11 @@ public class newstaff extends javax.swing.JFrame {
 
         combogender.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         combogender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE", " " }));
+        combogender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combogenderActionPerformed(evt);
+            }
+        });
 
         bttnadd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bttnadd.setText("ADD");
@@ -119,6 +125,11 @@ public class newstaff extends javax.swing.JFrame {
 
         bttnupdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bttnupdate.setText("UPDATE");
+        bttnupdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bttnupdateMouseClicked(evt);
+            }
+        });
         bttnupdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnupdateActionPerformed(evt);
@@ -127,6 +138,11 @@ public class newstaff extends javax.swing.JFrame {
 
         bttndelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bttndelete.setText("DELETE");
+        bttndelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bttndeleteMouseClicked(evt);
+            }
+        });
         bttndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttndeleteActionPerformed(evt);
@@ -135,6 +151,11 @@ public class newstaff extends javax.swing.JFrame {
 
         bttnview.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bttnview.setText("VIEW");
+        bttnview.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bttnviewMouseClicked(evt);
+            }
+        });
         bttnview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnviewActionPerformed(evt);
@@ -144,6 +165,11 @@ public class newstaff extends javax.swing.JFrame {
         tablestaff.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tablestaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -169,10 +195,6 @@ public class newstaff extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(262, 262, 262))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -203,13 +225,17 @@ public class newstaff extends javax.swing.JFrame {
                             .addComponent(combogender, 0, 150, Short.MAX_VALUE))))
                 .addGap(115, 115, 115))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(82, 82, 82)
+                .addGap(54, 54, 54)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -231,13 +257,14 @@ public class newstaff extends javax.swing.JFrame {
                     .addComponent(bttnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bttnadd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 102, 0));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         bttnback.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bttnback.setText("BACK");
@@ -270,28 +297,28 @@ public class newstaff extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(image4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(image4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(30, 30, 30)
                         .addComponent(bttnback))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(18, 18, 18)
                         .addComponent(bttnlogout)))
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(image4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120)
-                .addComponent(bttnback)
-                .addGap(66, 66, 66)
-                .addComponent(bttnlogout)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addGap(151, 151, 151)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(image4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(bttnback)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bttnlogout)))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -299,16 +326,16 @@ public class newstaff extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(832, Short.MAX_VALUE))
+                .addContainerGap(845, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -316,22 +343,22 @@ public class newstaff extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(203, Short.MAX_VALUE)
+                .addContainerGap(202, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(43, 43, 43))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -340,32 +367,32 @@ public class newstaff extends javax.swing.JFrame {
 
     private void txtstaffidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstaffidActionPerformed
         // TODO add your handling code here:
-        StaffController c = new StaffController(this);
+        //StaffController c = new StaffController(this);
     }//GEN-LAST:event_txtstaffidActionPerformed
 
     private void txtstaffnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstaffnameActionPerformed
         // TODO add your handling code here:
-        StaffController c = new StaffController(this);
+        //StaffController c = new StaffController(this);
     }//GEN-LAST:event_txtstaffnameActionPerformed
 
     private void txtpositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpositionActionPerformed
         // TODO add your handling code here:
-        StaffController c = new StaffController(this);
+        //StaffController c = new StaffController(this);
     }//GEN-LAST:event_txtpositionActionPerformed
 
     private void bttnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnaddActionPerformed
-        // TODO add your handling code here:
-        StaffController c = new StaffController(this);
+        // TODO add your handling code here:a
+        StaffController a = new StaffController(this,"add");
     }//GEN-LAST:event_bttnaddActionPerformed
 
     private void bttnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnupdateActionPerformed
         // TODO add your handling code here:
-        StaffController c = new StaffController(this);
+        StaffController d = new StaffController(this,"update");
     }//GEN-LAST:event_bttnupdateActionPerformed
 
     private void bttnviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnviewActionPerformed
         // TODO add your handling code here:
-        StaffController c = new StaffController(this);
+         StaffController b = new StaffController(this,"view");
     }//GEN-LAST:event_bttnviewActionPerformed
 
     private void bttnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnbackActionPerformed
@@ -398,12 +425,31 @@ public class newstaff extends javax.swing.JFrame {
 
     private void bttndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttndeleteActionPerformed
         // TODO add your handling code here:
-        StaffController c = new StaffController(this);
+         StaffController c = new StaffController(this, "delete");
     }//GEN-LAST:event_bttndeleteActionPerformed
 
     private void tablestaffAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablestaffAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_tablestaffAncestorAdded
+
+    private void bttnviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttnviewMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_bttnviewMouseClicked
+
+    private void bttndeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttndeleteMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_bttndeleteMouseClicked
+
+    private void bttnupdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttnupdateMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_bttnupdateMouseClicked
+
+    private void combogenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combogenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combogenderActionPerformed
 
     
     public StaffModel getUser() {
@@ -413,7 +459,7 @@ public class newstaff extends javax.swing.JFrame {
     }
 
     public void setMessage(String msg) {
-        JOptionPane.showMessageDialog(this, msg);
+        JOptionPane.showMessageDialog(this, "mssg");
     }
  public void addstaffListener(ActionListener log) {
         bttnadd.addActionListener(log);

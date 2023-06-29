@@ -262,7 +262,7 @@ public class ManageProduct extends javax.swing.JFrame {
         });
 
         bttnseller.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bttnseller.setText("SELLER");
+        bttnseller.setText("BACK");
         bttnseller.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnsellerActionPerformed(evt);

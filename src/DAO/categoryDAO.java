@@ -30,7 +30,7 @@ public class categoryDAO extends DbConnection {
     } 
     
     public boolean delete(categoryModel mod)  {
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr!");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
                  PreparedStatement pst = conn.prepareStatement("DELETE FROM category WHERE categoryId = ?")) {
 
                 pst.setInt(1, mod.getCategoryId());
@@ -66,7 +66,7 @@ public class categoryDAO extends DbConnection {
   public DefaultTableModel getCategoryTableModel() throws SQLException {
         DefaultTableModel tableModel = new DefaultTableModel();
         
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr!");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM category");
              ResultSet rs = ps.executeQuery()) {
             

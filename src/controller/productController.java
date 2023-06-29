@@ -13,19 +13,27 @@ public class productController {
     private ManageProduct view;
     private productDAO dao;
     
-    public productController(ManageProduct view) {
+    public productController(ManageProduct view, String button) {
         this.view = view;
         this.dao = new productDAO();
         
-        view.addcategoryListener(new productListener());
-        view.adddeleteListener(new deleteListener());
-        view.addupdateListener(new updateListener());
-        view.addviewListener(new viewListener());
+                if (button.equals("add")){
+            new productController.productListener().actionPerformed();
+        }else if (button.equals("delete")){
+            new productController.deleteListener().actionPerformed();
+        }
+        else if (button.equals("update")){
+            new productController.updateListener().actionPerformed();
+        }
+        else if (button.equals("view")){
+            new productController.viewListener().actionPerformed();
+        }
+        
     }
     
-    class productListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class productListener  {
+        
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 addproduct(model);
@@ -46,9 +54,9 @@ public class productController {
         }
     }
         
-    class deleteListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class deleteListener  {
+        
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 deleteproduct(model);
@@ -73,9 +81,9 @@ public class productController {
         }
     }
     
-    class updateListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class updateListener  {
+        
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 updateproduct(model);
@@ -96,9 +104,8 @@ public class productController {
         }
     }
     
-    class viewListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class viewListener {
+        public void actionPerformed( ) {
             try {
                 viewproduct();
             } catch (Exception ex) {

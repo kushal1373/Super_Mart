@@ -48,18 +48,18 @@ public class staffDAO extends DbConnection {
     public boolean update(StaffModel mod) {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
              PreparedStatement pst = conn.prepareStatement("UPDATE staff SET staffname = ?, position = ?, gender = ? WHERE staffid = ?")) {
-
+            
             pst.setString(1, mod.getstaffname());
             pst.setString(2, mod.getposition());
-            pst.setInt(3, mod.getstaffid());
-            pst.setString(4, mod.getgender());
+            pst.setInt(4,mod.getstaffid());
+            pst.setString(3, mod.getgender());
 
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
             System.err.println(e);
         }
-
+        System.out.println("Updated");
         return false;
     }
 
