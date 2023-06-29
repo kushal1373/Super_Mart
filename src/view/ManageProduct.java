@@ -349,11 +349,9 @@ public class ManageProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_txtpriceActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-<<<<<<< HEAD
+
         productController c = new productController(this,"add");
-=======
- productController c = new productController(this,"add");
->>>>>>> b45f369bbb4467e3326331c7054f34582d93316b
+
           
     }//GEN-LAST:event_addBtnActionPerformed
 
