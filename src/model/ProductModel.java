@@ -10,6 +10,11 @@ public class ProductModel {
 
     int productid,quantity;
     double price;
+    public ProductModel(int productid){
+        this.productid = productid;
+        
+        
+    }
     public ProductModel(int productid, String productname, String category, int quantity, double price)
     {
         this.productid=productid;

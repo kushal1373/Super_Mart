@@ -32,7 +32,7 @@ public class BillingDAO extends DbConnection {
     }
 
     public boolean delete(BillingModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
              PreparedStatement pst = conn.prepareStatement("DELETE FROM product WHERE productid = ?")) {
 
             pst.setInt(1, mod.getProductid());
@@ -47,7 +47,7 @@ public class BillingDAO extends DbConnection {
     }
 
     public boolean update(BillingModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
              PreparedStatement pst = conn.prepareStatement("UPDATE product SET productname = ?, category = ?, quantity = ?, price = ? WHERE productid = ?")) {
 
             pst.setString(1, mod.getProductname());
@@ -68,7 +68,7 @@ public class BillingDAO extends DbConnection {
     public DefaultTableModel getproductTableModel() throws SQLException {
         DefaultTableModel tableModel = new DefaultTableModel();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM product");
              ResultSet rs = ps.executeQuery()) {
 
@@ -92,5 +92,9 @@ public class BillingDAO extends DbConnection {
         }
 
         return tableModel;
+    }
+
+    public DefaultTableModel getBillingTableModel() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class productDAO extends DbConnection {
 
     public boolean add(ProductModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
              PreparedStatement pst = conn.prepareStatement("INSERT INTO product (productid, productname, category, quantity, price) VALUES (?, ?, ?, ?, ?)")) {
 
             pst.setInt(1, mod.getProductid());
@@ -31,7 +31,7 @@ public class productDAO extends DbConnection {
     }
 
     public boolean delete(ProductModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
              PreparedStatement pst = conn.prepareStatement("DELETE FROM product WHERE productid = ?")) {
 
             pst.setInt(1, mod.getProductid());
@@ -46,7 +46,7 @@ public class productDAO extends DbConnection {
     }
 
     public boolean update(ProductModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
              PreparedStatement pst = conn.prepareStatement("UPDATE product SET productname = ?, category = ?, quantity = ?, price = ? WHERE productid = ?")) {
 
             pst.setString(1, mod.getProductname());
@@ -67,7 +67,7 @@ public class productDAO extends DbConnection {
     public DefaultTableModel getproductTableModel() throws SQLException {
         DefaultTableModel tableModel = new DefaultTableModel();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM product");
              ResultSet rs = ps.executeQuery()) {
 
@@ -92,4 +92,31 @@ public class productDAO extends DbConnection {
 
         return tableModel;
     }
+    public ProductModel getProductById(int productId) {
+    ProductModel product = null;
+
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
+         PreparedStatement pst = conn.prepareStatement("SELECT * FROM product WHERE productid = ?")) {
+
+        pst.setInt(1, productId);
+
+        try (ResultSet rs = pst.executeQuery()) {
+            if (rs.next()) {
+                int productid = rs.getInt("productid");
+                String productname = rs.getString("productname");
+                String category = rs.getString("category");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+
+                product = new ProductModel(productid, productname, category, quantity, price);
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println(e);
+    }
+
+    return product;
 }
+
+}
+
