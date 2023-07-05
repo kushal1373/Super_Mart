@@ -48,21 +48,21 @@ public class LoginController {
                     ManagerView MV = new ManagerView();
                     MV.show();       
                 }
-                else
-                {
-                    view.setMessage("Invalid Username or Password or Role");  
-                }
-                
-//                if(model.getRole().equals("Seller"))
-//                {
-//                    view.setMessage("Login Successfully");
-//                    billingform BF = new billingform();
-//                    BF.show();       
-//                }
 //                else
 //                {
 //                    view.setMessage("Invalid Username or Password or Role");  
 //                }
+//                
+                else if(model.getRole().equals("Seller"))
+                {
+                    view.setMessage("Login Successfully");
+                    billingform BF = new billingform();
+                    BF.show();       
+                }
+                else
+                {
+                    view.setMessage("Invalid Username or Password or Role");  
+                }
             }
             catch(Exception e1)
             {
