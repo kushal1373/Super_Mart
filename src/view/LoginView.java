@@ -56,6 +56,7 @@ LoginModel model;
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("BIG MART");
 
+        image1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icon_1.png"))); // NOI18N
         image1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 image1AncestorAdded(evt);
@@ -204,7 +205,7 @@ LoginModel model;
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
+                .addContainerGap(253, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(227, 227, 227))
         );
@@ -229,7 +230,10 @@ LoginModel model;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +246,7 @@ LoginModel model;
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         // TODO add your handling code here:
-       LoginController l = new LoginController(this); 
+       LoginController m = new LoginController(this); 
         System.out.println("Test");
     }//GEN-LAST:event_btnloginActionPerformed
 
@@ -296,6 +300,7 @@ public LoginModel getUser()
     public void addLoginListener(ActionListener log)
     {
         btnlogin.addActionListener(log);
+        
     }
     /**
      * @param args the command line arguments

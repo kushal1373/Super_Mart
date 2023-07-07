@@ -42,27 +42,25 @@ public class LoginController {
                 if(model.getUsername().isEmpty() || model.getPassword().isEmpty()){
                   JOptionPane.showMessageDialog(null,"This Box are Empty.", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
-                else if(model.getRole().equals("Manager"))
-                {
-                    view.setMessage("Login Successfully");
-                    ManagerView MV = new ManagerView();
-                    MV.show();       
-                }
-//                else
-//                {
-//                    view.setMessage("Invalid Username or Password or Role");  
-//                }
-//                
-                else if(model.getRole().equals("Seller"))
-                {
-                    view.setMessage("Login Successfully");
-                    billingform BF = new billingform();
-                    BF.show();       
-                }
-                else
-                {
-                    view.setMessage("Invalid Username or Password or Role");  
-                }
+                    if (checkUser(model)) {
+                        if (model.getRole().equals("Manager")) {
+                               view.setMessage("Login Successfully");
+                               ManagerView MV = new ManagerView();
+                               MV.show();       
+                           }
+                        else if (model.getRole().equals("Seller")) {
+                               view.setMessage("Login Successfully");
+                               billingform BF = new billingform();
+                               BF.show();       
+                           }
+                           else {
+                               view.setMessage("Invalid Role");  
+                           }
+                       }
+                       else {
+                           view.setMessage("Invalid Username or Password");  
+                       }
+
             }
             catch(Exception e1)
             {
