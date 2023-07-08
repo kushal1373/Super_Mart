@@ -4,25 +4,31 @@
  */
 package view;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import view.LoginView;
+
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.BillingModel;
+import controller.BillingController;
+import controller.productController;
+import java.awt.event.KeyEvent;
+import javax.swing.event.TableModelEvent;
+import model.ProductModel;
 
 /**
  *
  * @author suyog
  */
 public class billingform extends javax.swing.JFrame {
+    ProductModel model;
+    BillingModel mod;
+//    DefaultTableModel mode;
+//    int rowcount;
 
-    /**
-     * Creates new form billingform
-     */
     public billingform() {
         initComponents();
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,20 +40,20 @@ public class billingform extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        bttnlogout = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
         txtbillno = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtproductname = new javax.swing.JTextField();
+        txtquantity = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
-        bttnsave = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtcategory = new javax.swing.JComboBox<>();
+        updateBtn = new javax.swing.JButton();
+        saveBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
+        vireBtn = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txttotal = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -55,13 +61,13 @@ public class billingform extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtgrandtotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        billingTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton5 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        printBtn = new javax.swing.JButton();
+        txtproductid = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtprice = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,11 +78,11 @@ public class billingform extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("BILLING  PAGE");
 
-        bttnlogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bttnlogout.setText("LOG OUT");
-        bttnlogout.addActionListener(new java.awt.event.ActionListener() {
+        logoutBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        logoutBtn.setText("LOG OUT");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnlogoutActionPerformed(evt);
+                logoutBtnActionPerformed(evt);
             }
         });
 
@@ -94,14 +100,14 @@ public class billingform extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("PRODUCT NAME:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtproductname.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtproductname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtproductnameActionPerformed(evt);
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtquantity.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,38 +117,43 @@ public class billingform extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("CATEGORY:");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DAIRY", "BAKERY", "MEAT", "BEVRAGE", "FRUITS", "VEGETABLE", "SNACKS", "HOUSEHOLD" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        txtcategory.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtcategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DAIRY", "BAKERY", "MEAT", "BEVRAGE", "FRUITS", "VEGETABLE", "SNACKS", "HOUSEHOLD" }));
+        txtcategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                txtcategoryActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setText("UPDATE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updateBtn.setText("UPDATE");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
 
-        bttnsave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bttnsave.setText("SAVE");
+        saveBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        saveBtn.setText("SAVE");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("ADD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addBtn.setText("ADD");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("DELETE");
+        deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteBtn.setText("DELETE");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("VIEW");
+        vireBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        vireBtn.setText("VIEW");
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,7 +186,7 @@ public class billingform extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        billingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -193,14 +204,25 @@ public class billingform extends javax.swing.JFrame {
                 "Product ID", "Product Name", "Quantity", "Category", "Price"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        billingTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                billingTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(billingTable);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setText("PRINT");
+        printBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        printBtn.setText("PRINT");
+
+        txtproductid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtproductidKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -218,9 +240,9 @@ public class billingform extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(402, 402, 402)
-                        .addComponent(bttnsave)
+                        .addComponent(saveBtn)
                         .addGap(55, 55, 55)
-                        .addComponent(jButton5))
+                        .addComponent(printBtn))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addContainerGap()
@@ -230,7 +252,7 @@ public class billingform extends javax.swing.JFrame {
                             .addGap(173, 173, 173)
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bttnlogout))
+                            .addComponent(logoutBtn))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addGap(101, 101, 101)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,30 +276,30 @@ public class billingform extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jButton1)
+                                                .addComponent(addBtn)
                                                 .addComponent(jLabel14))
                                             .addGap(33, 33, 33)
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(txtproductname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(updateBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(txtproductid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(jLabel2))
                                     .addGap(107, 107, 107)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jButton3)
+                                            .addComponent(deleteBtn)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2))
+                                            .addComponent(vireBtn))
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                                     .addComponent(jLabel16)
                                                     .addGap(18, 18, 18)
-                                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                                     .addComponent(jLabel15)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGap(6, 6, 6)))))
                             .addGap(36, 36, 36)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +307,7 @@ public class billingform extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtprice, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -301,15 +323,15 @@ public class billingform extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(bttnlogout))))
+                            .addComponent(logoutBtn))))
                 .addGap(76, 76, 76)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtproductid, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtprice, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -324,16 +346,16 @@ public class billingform extends javax.swing.JFrame {
                             .addComponent(jLabel11)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtproductname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14)
                             .addComponent(jLabel16)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton4)
-                            .addComponent(jButton3)
-                            .addComponent(jButton2))
+                            .addComponent(addBtn)
+                            .addComponent(updateBtn)
+                            .addComponent(deleteBtn)
+                            .addComponent(vireBtn))
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -342,8 +364,8 @@ public class billingform extends javax.swing.JFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(bttnsave))
+                    .addComponent(printBtn)
+                    .addComponent(saveBtn))
                 .addContainerGap())
         );
 
@@ -364,17 +386,75 @@ public class billingform extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        BillingController c = new BillingController(this,"update");
+//        updateDataInTable();
+//        mode.fireTableDataChanged();
+    }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+//    private void updateDataInTable() {
+////        int selectedRow = billingTable.getSelectedRow();
+//        DefaultTableModel model = (DefaultTableModel)billingTable.getModel();
+//        int Myindex= billingTable.getSelectedRow();
+//        if (Myindex == -1) {
+//            JOptionPane.showMessageDialog(this, "Please select a row to update.", "Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+//        String productId = txtproductid.getText();
+//        String productName = txtproductname.getText();
+//        String quantity = txtquantity.getText();
+//        String category = txtcategory.getSelectedItem().toString();
+//        String price = txtprice.getText();
+//
+//        model.setValueAt(productId, selectedRow, 0);
+//        model.setValueAt(productName, selectedRow, 1);
+//        model.setValueAt(quantity, selectedRow, 2);
+//        model.setValueAt(category, selectedRow, 3);
+//        model.setValueAt(price, selectedRow, 4);
+
+        
+//        txtproductid.setText(model.getValueAt(Myindex,0).toString());
+//        txtproductname.setText(model.getValueAt(Myindex,1).toString());
+//        txtquantity.setText(model.getValueAt(Myindex,2).toString());
+//        txtcategory.setSelectedItem(model.getValueAt(Myindex,3).toString());
+////        txtprice.setText(model.getValueAt(Myindex,4).toString());
+//        int price = Integer.parseInt(model.getValueAt(Myindex,4).toString());
+//
+//        // Clear the text fields after updating the data
+//       
+//    }
+    
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        BillingController c = new BillingController(this,"add");
+//        addDataToTable();  
+//        mode.fireTableDataChanged();
+    }//GEN-LAST:event_addBtnActionPerformed
+
+//    private void addDataToTable() {
+//     
+//      mode = (DefaultTableModel) billingTable.getModel();
+//
+//        String productId = txtproductid.getText();
+//        String productName = txtproductname.getText();
+//        String quantity = txtquantity.getText();
+//        String category = txtcategory.getSelectedItem().toString();
+//        Double price = txtprice.getDouble();
+//        mode.setRowCount(rowcount);
+//        rowcount++;
+//
+//        Object[] rowData = {productId, productName, quantity, category, price};
+//        mode.addRow(rowData);
+//
+//        // Clear the text fields after adding the data
+//        
+//    }
+    
+    private void txtproductnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtproductnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtproductnameActionPerformed
 
     private void txtgrandtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtgrandtotalActionPerformed
         // TODO add your handling code here:
@@ -392,17 +472,76 @@ public class billingform extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbillnoActionPerformed
 
-    private void bttnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnlogoutActionPerformed
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         // TODO add your handling code here:
          setVisible(false);
         LoginView r = new LoginView();
         r.setVisible(true);
-    }//GEN-LAST:event_bttnlogoutActionPerformed
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void txtcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcategoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_txtcategoryActionPerformed
 
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        BillingController c = new BillingController(this,"update");
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void billingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billingTableMouseClicked
+        // TODO add your handling code here:
+//        DefaultTableModel model = (DefaultTableModel)billingTable.getModel();
+//        int Myindex= billingTable.getSelectedRow();
+//        txtproductid.setText(model.getValueAt(Myindex,0).toString());
+//        txtproductname.setText(model.getValueAt(Myindex,1).toString());
+//        txtquantity.setText(model.getValueAt(Myindex,2).toString());
+//        txtcategory.setSelectedItem(model.getValueAt(Myindex,3).toString());
+////        txtprice.setText(model.getValueAt(Myindex,4).toString());
+//        int price = Integer.parseInt(model.getValueAt(Myindex,4).toString());
+    }//GEN-LAST:event_billingTableMouseClicked
+
+    private void txtproductidKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtproductidKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Enter key pressed
+            String productId = txtproductid.getText();
+            // Call a method to load data based on the product ID
+           productController pController = new productController();
+          ProductModel product = pController.getProductById(Integer.parseInt(txtproductid.getText()));
+         txtproductname.setText(product.getProductname());
+         txtcategory.setSelectedItem(product.getCategory());
+         txtprice.setText(Double.toString(product.getPrice()));
+
+        }
+    }//GEN-LAST:event_txtproductidKeyPressed
+
+    public BillingModel getUser() {
+        int productId = Integer.parseInt(txtproductid.getText());
+        int Billno = Integer.parseInt(txtbillno.getText());
+    String productName = txtproductname.getText();
+    String Category = txtcategory.getSelectedItem().toString();
+    int Quantity = Integer.parseInt(txtquantity.getText());
+    double Price = Double.parseDouble(txtprice.getText());
+
+   mod  = new BillingModel(Billno, productId, productName, Category, Quantity, Price);
+    return mod;
+    }
+
+    public void setMessage(String msg) {
+        JOptionPane.showMessageDialog(this, "msg");
+    }
+ public void addbillListener(ActionListener log) {
+        addBtn.addActionListener(log);
+
+    }
+   public void adddeleteListener(ActionListener log) {
+        deleteBtn.addActionListener(log);
+
+   }
+   public void addupdateListener(ActionListener log) {
+         updateBtn.addActionListener(log);
+   }
+  
     /**
      * @param args the command line arguments
      */
@@ -437,16 +576,15 @@ public class billingform extends javax.swing.JFrame {
             }
         });
     }
+    public void setTableModel(DefaultTableModel Model) {
+    // Set the table model to your view's table
+  billingTable.setModel(Model);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bttnlogout;
-    private javax.swing.JButton bttnsave;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JTable billingTable;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -460,15 +598,20 @@ public class billingform extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JButton printBtn;
+    private javax.swing.JButton saveBtn;
     private javax.swing.JTextField txtbillno;
+    private javax.swing.JComboBox<String> txtcategory;
     private javax.swing.JTextField txtdiscount;
     private javax.swing.JTextField txtgrandtotal;
+    private javax.swing.JTextField txtprice;
+    private javax.swing.JTextField txtproductid;
+    private javax.swing.JTextField txtproductname;
+    private javax.swing.JTextField txtquantity;
     private javax.swing.JTextField txttotal;
+    private javax.swing.JButton updateBtn;
+    private javax.swing.JButton vireBtn;
     // End of variables declaration//GEN-END:variables
 }

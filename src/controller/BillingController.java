@@ -13,19 +13,27 @@ public class BillingController {
     private billingform view;
     private BillingDAO dao;
     
-    public BillingController(billingform view) {
+    public BillingController(billingform view, String button) {
         this.view = view;
         this.dao = new BillingDAO();
         
-        view.addBillingListener(new BillingListener());
-        view.addDeleteListener(new DeleteListener());
-        view.addUpdateListener(new UpdateListener());
-        view.addViewListener(new ViewListener());
+        if (button.equals("add")){
+            new BillingController.billListener().actionPerformed();
+        }
+        else if (button.equals("delete")){
+            new BillingController.deleteListener().actionPerformed();
+        }
+        else if (button.equals("update")){
+            new BillingController.updateListener().actionPerformed();
+        }
+        else if (button.equals("view")){
+            new BillingController.viewListener().actionPerformed();
+        }
+        
     }
     
-    class BillingListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class billListener{
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 addBilling(model);
@@ -46,9 +54,8 @@ public class BillingController {
         }
     }
         
-    class DeleteListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class deleteListener{
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 deleteBilling(model);
@@ -73,9 +80,8 @@ public class BillingController {
         }
     }
     
-    class UpdateListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class updateListener{
+        public void actionPerformed() {
             try {
                 model = view.getUser();
                 updateBilling(model);
@@ -96,9 +102,8 @@ public class BillingController {
         }
     }
     
-    class ViewListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    class viewListener{
+        public void actionPerformed() {
             try {
                 viewBilling();
             } catch (Exception ex) {

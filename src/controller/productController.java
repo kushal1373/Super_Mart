@@ -8,10 +8,13 @@ import model.ProductModel;
 import DAO.productDAO;
 import view.ManageProduct;
 
+
 public class productController {
     private ProductModel model;
     private ManageProduct view;
     private productDAO dao;
+    public productController(){  
+    }
     
     public productController(ManageProduct view, String button) {
         this.view = view;
@@ -30,6 +33,12 @@ public class productController {
         }
         
     }
+    public ProductModel getProductById(int productId) {
+        productDAO d=new productDAO();
+        return d.getProductById(productId);
+    }
+
+    
     
     class productListener  {
         

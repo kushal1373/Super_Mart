@@ -4,6 +4,8 @@
  */
 package model;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.TableModel;
 
 public class ProductModel {
     String  productname,category;
@@ -57,10 +59,7 @@ public class ProductModel {
 
     public void setPrice(double price) {
         this.price = price;
-    }
+    } 
 
-    
-   
-    
 }
 

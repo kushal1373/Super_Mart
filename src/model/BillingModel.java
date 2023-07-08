@@ -67,9 +67,5 @@ public class BillingModel {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    
-   
-    
 }
 

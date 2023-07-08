@@ -6,9 +6,8 @@ import javax.swing.*;
 
 import java.sql.*;
 
-
-
 public class DbConnection {
+
 
     public Connection connection;
 
@@ -26,7 +25,7 @@ public class DbConnection {
 
             String username = "root";
 
-            String password = "9808640305@Sr";
+            String password = "binumaka008!";
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -62,7 +61,7 @@ public class DbConnection {
             System.out.println("There");
             String username = "root";
 
-            String password = "9808640305@Sr";
+            String password = "binumaka008!";
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
