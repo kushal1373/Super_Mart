@@ -4,21 +4,22 @@
  */
 package model;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.TableModel;
 
-public class BillingModel {
+public class ProductModel {
     String  productname,category;
 
     int productid,quantity;
     double price;
-    public BillingModel (int productid, String productname, String category, int quantity, double price)
+    public ProductModel(int productid, String productname, String category, int quantity, double price)
     {
-       
         this.productid=productid;
         this.productname=productname;
         this.category=category;  
         this.quantity=quantity;
         this.price=price;
-    }
+    } 
 
     public int getProductid() {
         return productid;
@@ -49,7 +50,7 @@ public class BillingModel {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity =quantity;
+        this.quantity = quantity;
     }
 
     public double getPrice() {
@@ -58,6 +59,7 @@ public class BillingModel {
 
     public void setPrice(double price) {
         this.price = price;
-    }
+    } 
+
 }
 
