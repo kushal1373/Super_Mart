@@ -8,10 +8,18 @@ import controller.BillingController;
 import controller.productController;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.print.PrinterException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.BillingModel;
 import model.ProductModel;
+import view.LoginView;
+
 
 public class billingform extends javax.swing.JFrame {
 BillingModel mod;
@@ -53,7 +61,7 @@ BillingModel mod;
         jScrollPane1 = new javax.swing.JScrollPane();
         billingTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        bill = new javax.swing.JTextArea();
         printBtn = new javax.swing.JButton();
         txtproductid = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -125,6 +133,11 @@ BillingModel mod;
 
         saveBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         saveBtn.setText("SAVE");
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
 
         addBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addBtn.setText("ADD");
@@ -201,12 +214,17 @@ BillingModel mod;
         });
         jScrollPane1.setViewportView(billingTable);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        bill.setColumns(20);
+        bill.setRows(5);
+        jScrollPane2.setViewportView(bill);
 
         printBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         printBtn.setText("PRINT");
+        printBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printBtnActionPerformed(evt);
+            }
+        });
 
         txtproductid.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -397,15 +415,13 @@ BillingModel mod;
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
         BillingController c = new BillingController(this,"update");
-        //        updateDataInTable();
-        //        mode.fireTableDataChanged();
+        
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
         BillingController c = new BillingController(this,"add");
-        //        addDataToTable();
-        //        mode.fireTableDataChanged();
+        
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -426,15 +442,7 @@ BillingModel mod;
     }//GEN-LAST:event_txtgrandtotalActionPerformed
 
     private void billingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billingTableMouseClicked
-        // TODO add your handling code here:
-        //        DefaultTableModel model = (DefaultTableModel)billingTable.getModel();
-        //        int Myindex= billingTable.getSelectedRow();
-        //        txtproductid.setText(model.getValueAt(Myindex,0).toString());
-        //        txtproductname.setText(model.getValueAt(Myindex,1).toString());
-        //        txtquantity.setText(model.getValueAt(Myindex,2).toString());
-        //        txtcategory.setSelectedItem(model.getValueAt(Myindex,3).toString());
-        ////        txtprice.setText(model.getValueAt(Myindex,4).toString());
-        //        int price = Integer.parseInt(model.getValueAt(Myindex,4).toString());
+        
     }//GEN-LAST:event_billingTableMouseClicked
 
     private void txtproductidKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtproductidKeyPressed
@@ -442,7 +450,7 @@ BillingModel mod;
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             try {
                 String productId = txtproductid.getText();
-                // Call a method to load data based on the product ID
+                
                 productController c = new productController();
                 ProductModel product = c.getProductById(Integer.parseInt(productId));
                 if (product != null) {
@@ -460,9 +468,23 @@ BillingModel mod;
         }
     }//GEN-LAST:event_txtproductidKeyPressed
 
+    private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            bill.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(billingform.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_printBtnActionPerformed
+
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        // TODO add your handling code here:
+        BillingController c = new BillingController(this,"save");
+    }//GEN-LAST:event_saveBtnActionPerformed
+
      public BillingModel getUser() {
         int productId = Integer.parseInt(txtproductid.getText());
-//        int Billno = Integer.parseInt(txtbillno.getText());
+        
     String productName = txtproductname.getText();
     String Category = txtcategory.getSelectedItem().toString();
     int Quantity = Integer.parseInt(txtquantity.getText());
@@ -472,8 +494,8 @@ BillingModel mod;
     return mod;
     }
 
-    public void setMessage(String msg) {
-        JOptionPane.showMessageDialog(this, "msg");
+   public void setMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
     }
  public void addbillListener(ActionListener log) {
         addBtn.addActionListener(log);
@@ -486,10 +508,32 @@ BillingModel mod;
    public void addupdateListener(ActionListener log) {
          updateBtn.addActionListener(log);
    }
- 
-    public void setTableModel(DefaultTableModel Model) {
-    // Set the table model to your view's table
-  billingTable.setModel(Model);
+   
+   public void addcalculateListener(ActionListener log) {
+         saveBtn.addActionListener(log);
+   }
+   
+   public DefaultTableModel getTableModel() {
+    return (DefaultTableModel) billingTable.getModel();
+}
+ public void setText(double total) {
+    String totalString = String.format("%.2f", total); 
+    txttotal.setText(totalString); 
+}
+
+    public JTextField getDiscountField() {
+    return txtdiscount; 
+}
+    public JTextField getGrandTotalField() {
+    return txtgrandtotal ;
+}
+
+   public JTextField getBillNoField() {
+    return txtbillno; 
+}
+
+    public JTextArea getBillField() {
+    return bill; 
 }
     /**
      * @param args the command line arguments
@@ -528,6 +572,7 @@ BillingModel mod;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JTextArea bill;
     private javax.swing.JTable billingTable;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel1;
@@ -543,7 +588,6 @@ BillingModel mod;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton printBtn;
     private javax.swing.JButton saveBtn;
