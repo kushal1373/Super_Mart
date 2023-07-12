@@ -6,6 +6,7 @@ package controller;
 
  
 
+import view.billingform;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -73,7 +74,7 @@ public class LoginController {
         public boolean checkUser(LoginModel user) throws Exception
         {
              Class.forName("com.mysql.cj.jdbc.Driver");
-               Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","9808640305@Sr");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","ajina kaya8860");
           String sql="select * from register where username='"+user.getUsername()+"' AND password='"+user.getPassword()+"' AND role ='"+user.getRole()+"'";
           try
           {

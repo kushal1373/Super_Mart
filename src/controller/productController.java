@@ -6,21 +6,22 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ProductModel;
 import DAO.productDAO;
-import view.ManageProduct;
 
+import view.ManageProduct;
 
 public class productController {
     private ProductModel model;
     private ManageProduct view;
     private productDAO dao;
-    public productController(){  
-    }
     
+   public productController() {
+        dao = new productDAO();
+    }
     public productController(ManageProduct view, String button) {
         this.view = view;
         this.dao = new productDAO();
         
-               if (button.equals("add")){
+                if (button.equals("add")){
             new productController.productListener().actionPerformed();
         }else if (button.equals("delete")){
             new productController.deleteListener().actionPerformed();
@@ -34,11 +35,8 @@ public class productController {
         
     }
     public ProductModel getProductById(int productId) {
-        productDAO d=new productDAO();
-        return d.getProductById(productId);
+        return dao.getProductById(productId);
     }
-
-    
     
     class productListener  {
         
@@ -63,8 +61,7 @@ public class productController {
         }
     }
         
-    class deleteListener  {
-        
+   class deleteListener{
         public void actionPerformed() {
             try {
                 model = view.getUser();
@@ -78,16 +75,17 @@ public class productController {
             try {
                 boolean success = dao.delete(model);
                 if (success) {
-                    System.out.println("delete Successfully");
-                    JOptionPane.showMessageDialog(null, "delete Successfully");
+                    System.out.println("product deleted successfully.");
+                    JOptionPane.showMessageDialog(null, "product deleted successfully.");
                 } else {
-                    System.out.println("Failed to delete product.");
-                    JOptionPane.showMessageDialog(null, " Failed to delete product ");
+                    System.out.println("Failed to delete category.");
+                    JOptionPane.showMessageDialog(null, "Failed to delete product.");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    
     }
     
     class updateListener  {
@@ -102,6 +100,7 @@ public class productController {
         }
         
         public void updateproduct(ProductModel model) {
+            try{
             boolean success = dao.update(model);
             if (success) {
                 System.out.println("product updated successfully.");
@@ -109,10 +108,12 @@ public class productController {
             } else {
                 System.out.println("Failed to update product.");
                 JOptionPane.showMessageDialog(null, " Failed to update product ");
+             }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
-    
     class viewListener {
         public void actionPerformed( ) {
             try {
