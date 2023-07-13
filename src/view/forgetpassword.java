@@ -167,7 +167,7 @@ forgetmodel model;
     private void bttnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnbackActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        LoginView r = new LoginView();
+        ManagerView r = new ManagerView();
         r.setVisible(true);
     }//GEN-LAST:event_bttnbackActionPerformed
 public forgetmodel getUser()
