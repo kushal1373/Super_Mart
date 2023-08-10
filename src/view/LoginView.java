@@ -242,9 +242,18 @@ public LoginModel getUser()
         btnlogin.addActionListener(log);
         
     }
-    /**
-     * @param args the command line arguments
-     */
+    public void setUserName(String username) {
+    txtusername.setText(username);
+    }
+
+    public void setPassword(String password) {
+        txtpassword.setText(password);
+    }
+
+    public void performLogin() {
+        btnlogin.doClick();
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -276,6 +285,7 @@ public LoginModel getUser()
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnlogin;
@@ -294,9 +304,7 @@ public LoginModel getUser()
     private javax.swing.JTextField txtpassword;
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
-  private void Resetpassword() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 }
    
    

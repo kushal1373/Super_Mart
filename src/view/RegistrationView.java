@@ -285,7 +285,41 @@ public class RegistrationView extends javax.swing.JFrame {
     public void addRegistrationListener(ActionListener log) {
         signupbtn.addActionListener(log);
     }
+    
+    public void setFirstName(String firstName) {
+        txtfname.setText(firstName);
+    }
 
+    public void setLastName(String lastName) {
+        txtlname.setText(lastName);
+    }
+
+    public void setEmail(String email) {
+        txtemail.setText(email);
+    }
+
+    public void setUsername(String username) {
+        txtusername.setText(username);
+    }
+
+    public void setPassword(String password) {
+        txtpassword.setText(password);
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        txtconfirmpassword.setText(confirmPassword);
+    }
+
+    public void setRole(String role) {
+        comborole.setSelectedItem(role);
+    }
+
+    public void setGender(String gender) {
+        combogender.setSelectedItem(gender);
+    }
+    public void performSignup() {
+        signupbtn.doClick();
+    }
    
     public static void main(String args[]) {
         
@@ -321,4 +355,5 @@ public class RegistrationView extends javax.swing.JFrame {
     private javax.swing.JTextField txtpassword;
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
+
 }
