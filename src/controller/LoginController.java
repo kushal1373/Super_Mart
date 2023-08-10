@@ -62,7 +62,7 @@ public class LoginController {
                            }
                        }
                        else {
-                           view.setMessage("Invalid Username or Password");  
+                           view.setMessage("Invalid Username or Password or Role ");  
                        }
 
             }
@@ -77,7 +77,7 @@ public class LoginController {
         public boolean checkUser(LoginModel user) throws Exception
         {
              Class.forName("com.mysql.cj.jdbc.Driver");
-               Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","ajina kaya8860");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","9808640305@Sr");
           String sql="select * from register where username='"+user.getUsername()+"' AND password='"+user.getPassword()+"' AND role ='"+user.getRole()+"'";
           try
           {
@@ -105,7 +105,7 @@ public class LoginController {
 public Boolean dataUser(LoginModel user) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
         String sql = "select * from register where username=? AND password=? AND role=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, user.getUsername());

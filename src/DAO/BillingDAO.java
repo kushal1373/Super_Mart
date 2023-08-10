@@ -13,7 +13,7 @@ import model.BillingModel;
 public class BillingDAO extends DbConnection {
 
     public boolean add(BillingModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
              PreparedStatement pst = conn.prepareStatement("INSERT INTO billing (productid, productname, category, quantity, price) VALUES (?, ?, ?, ?, ?)")) {
 
             pst.setInt(1, mod.getProductid());
@@ -32,7 +32,7 @@ public class BillingDAO extends DbConnection {
     }
 
      public boolean delete(BillingModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
              PreparedStatement pst = conn.prepareStatement("DELETE FROM billing WHERE productid = ?")) {
 
             pst.setInt(1, mod.getProductid());
@@ -47,7 +47,7 @@ public class BillingDAO extends DbConnection {
     }
 
     public boolean update(BillingModel mod) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
              PreparedStatement pst = conn.prepareStatement("UPDATE billing SET productname = ?, category = ?, quantity = ?, price = ? WHERE productid = ?")) {
 
             pst.setString(1, mod.getProductname());
@@ -68,7 +68,7 @@ public class BillingDAO extends DbConnection {
     public DefaultTableModel getTableModel() throws SQLException {
         DefaultTableModel tableModel = new DefaultTableModel();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM billing");
              ResultSet rs = ps.executeQuery()) {
 
@@ -95,7 +95,7 @@ public class BillingDAO extends DbConnection {
     }
 
     public void saveBill(BillingModel billModel) {
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "9808640305@Sr");
          PreparedStatement pst = conn.prepareStatement("INSERT INTO billing (productid, productname, category, quantity, price) VALUES (?, ?, ?, ?, ?)")) {
 
         pst.setInt(1, billModel.getProductid());

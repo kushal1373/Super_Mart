@@ -78,6 +78,9 @@ public class RegistrationView extends javax.swing.JFrame {
             }
         });
 
+        txtconfirmpassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtconfirmpassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("CONFIRM PASSWORD:");
 
@@ -91,6 +94,9 @@ public class RegistrationView extends javax.swing.JFrame {
                 comboroleActionPerformed(evt);
             }
         });
+
+        txtpassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtpassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("PASSWORD:");
@@ -106,12 +112,20 @@ public class RegistrationView extends javax.swing.JFrame {
             }
         });
 
+        txtusername.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtusername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("USERNAME:");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("E-MAIL:");
 
+        txtemail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtemail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtfname.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtfname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtfname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfnameActionPerformed(evt);
@@ -124,6 +138,8 @@ public class RegistrationView extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("LAST NAME:");
 
+        txtlname.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtlname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtlname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtlnameActionPerformed(evt);

@@ -11,7 +11,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import view.billingform;
 
-
 public class BillingController {
     private BillingModel model;
     private billingform view;
@@ -19,13 +18,13 @@ public class BillingController {
     private JTextField txtbillno;
     private JTextArea bill;
     private BillingModel billModel;
-    
+
     public BillingController(billingform view, String button) {
         this.view = view;
         this.dao = new BillingDAO();
         this.txtbillno = view.getBillNoField();
         this.bill = view.getBillField();
-        
+
         if (button.equals("add")){
             new billListener().actionPerformed();
         }
@@ -40,8 +39,6 @@ public class BillingController {
         }
     }
 
-   
-
     public void setDAO(BillingDAO dao) {
         this.dao = dao;
     }
@@ -53,7 +50,7 @@ public class BillingController {
             throw new IllegalStateException("DAO or BillingModel not set. Cannot save bill.");
         }
     }
-    
+
     class billListener {
         public void actionPerformed() {
             try {
@@ -61,7 +58,7 @@ public class BillingController {
                 addBilling(model);
                 addDataToTable(model); 
                 updateTotal();
-                
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -98,7 +95,7 @@ public class BillingController {
                 deleteBilling(model);
                 deleteDataFromTable(model); 
                 updateTotal();
-               
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -139,7 +136,7 @@ public class BillingController {
                 updateBilling(model);
                 updateDataInTable(model); 
                 updateTotal();
-                
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -194,13 +191,12 @@ public class BillingController {
     return total;
 }
     class calculateListener {
-
         
     public void actionPerformed() {
         try {
             model = view.getUser();
             calculateGrandTotal();
-        
+
             bill.setText("*************supermart********" + "\n\n" +
                     "Address: New Bhaktapur\n" +
                     "Phone Number: 998454334" + "\n" +
@@ -209,7 +205,7 @@ public class BillingController {
                     "------------------------------------------------------------------\n" +
                     "Product ID | Product Name | Quantity | Category | Price\n" +
                     "-------------------------------------------------------------------\n");
-
+            
             DefaultTableModel tableModel = view.getTableModel();
             int rowCount = tableModel.getRowCount();
             for (int i = 0; i < rowCount; i++) {
@@ -233,16 +229,12 @@ public class BillingController {
             bill.setText(bill.getText() + "Total: " + total + "\n");
             bill.setText(bill.getText() + "Discount: " + discount + "\n");
             bill.setText(bill.getText() + "Grand Total: " + grandTotal + "\n");
-
-            
-
             bill.setText(bill.getText() + "*******Thank you********");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     }
-    
 
    public void calculateGrandTotal() {
     double total = calculateTotal(view.getTableModel());
@@ -250,9 +242,6 @@ public class BillingController {
     double grandTotal = total - discount;
     view.getGrandTotalField().setText(String.valueOf(grandTotal));
 }
+}
 
-
-
-    }
-
-
+ 

@@ -47,7 +47,7 @@ public class forgetcontroller {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root",
-                    "ajina kaya8860");
+                    "9808640305@Sr");
 
             String sql = "SELECT * FROM register WHERE username=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
