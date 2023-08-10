@@ -29,6 +29,9 @@ public class LoginController {
 
 
     }
+
+   
+   
     class LoginListener 
     {
 
@@ -74,7 +77,7 @@ public class LoginController {
         public boolean checkUser(LoginModel user) throws Exception
         {
              Class.forName("com.mysql.cj.jdbc.Driver");
-               Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","9808640305@Sr");
+               Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","ajina kaya8860");
           String sql="select * from register where username='"+user.getUsername()+"' AND password='"+user.getPassword()+"' AND role ='"+user.getRole()+"'";
           try
           {
@@ -99,5 +102,25 @@ public class LoginController {
 
 
     }
+public Boolean dataUser(LoginModel user) {
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "ajina kaya8860");
+        String sql = "select * from register where username=? AND password=? AND role=?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, user.getUsername());
+        stmt.setString(2, user.getPassword());
+        stmt.setString(3, user.getRole());
+        ResultSet rs = stmt.executeQuery();
+
+        boolean userExists = rs.next();
+        conn.close();
+
+        return userExists;
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+        return false; // Return false in case of any exception
+    }
+}
 
 }

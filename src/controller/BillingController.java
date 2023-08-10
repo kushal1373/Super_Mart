@@ -15,9 +15,10 @@ import view.billingform;
 public class BillingController {
     private BillingModel model;
     private billingform view;
-    private BillingDAO dao;
+    public BillingDAO dao;
     private JTextField txtbillno;
     private JTextArea bill;
+    private BillingModel billModel;
     
     public BillingController(billingform view, String button) {
         this.view = view;
@@ -39,6 +40,19 @@ public class BillingController {
         }
     }
 
+   
+
+    public void setDAO(BillingDAO dao) {
+        this.dao = dao;
+    }
+
+    public void saveBill() {
+         if (dao != null && billModel != null) {
+            dao.saveBill(billModel);
+        } else {
+            throw new IllegalStateException("DAO or BillingModel not set. Cannot save bill.");
+        }
+    }
     
     class billListener {
         public void actionPerformed() {

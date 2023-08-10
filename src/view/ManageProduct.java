@@ -16,15 +16,7 @@ import model.*;
 
 public class ManageProduct extends javax.swing.JFrame {
     ProductModel model;
-    DefaultTableModel dtm =null;
-    Connection conn = null;
-    Statement stmt = null;
-    ResultSet rs = null;
-   DbConnection dbConnection = new DbConnection();
-
-    /**
-     * Creates new form categoryView
-     */
+    
     public ManageProduct() {
         initComponents();
     }

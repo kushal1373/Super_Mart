@@ -274,7 +274,7 @@ public class RegistrationView extends javax.swing.JFrame {
     }//GEN-LAST:event_combogenderActionPerformed
     public RegistrationModel getUser() {
        
-        model1 = new RegistrationModel(txtusername.getText(), txtpassword.getText(), txtfname.getText(), txtemail.getText(), txtemail.getText(), combogender.getSelectedItem().toString(), comborole.getSelectedItem().toString(),txtconfirmpassword.getText());
+        model1 = new RegistrationModel(txtusername.getText(), txtpassword.getText(), txtfname.getText(), txtlname.getText(), txtemail.getText(), combogender.getSelectedItem().toString(), comborole.getSelectedItem().toString(),txtconfirmpassword.getText());
         return model1;
     }
 

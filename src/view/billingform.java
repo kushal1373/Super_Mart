@@ -51,7 +51,6 @@ BillingModel mod;
         saveBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
-        vireBtn = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txttotal = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -154,9 +153,6 @@ BillingModel mod;
                 deleteBtnActionPerformed(evt);
             }
         });
-
-        vireBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        vireBtn.setText("VIEW");
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -293,11 +289,8 @@ BillingModel mod;
                                                 .addComponent(txtproductid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(jLabel2))
                                     .addGap(107, 107, 107)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(deleteBtn)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(vireBtn))
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(deleteBtn)
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -362,8 +355,7 @@ BillingModel mod;
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addBtn)
                             .addComponent(updateBtn)
-                            .addComponent(deleteBtn)
-                            .addComponent(vireBtn))
+                            .addComponent(deleteBtn))
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -601,6 +593,5 @@ BillingModel mod;
     private javax.swing.JTextField txtquantity;
     private javax.swing.JTextField txttotal;
     private javax.swing.JButton updateBtn;
-    private javax.swing.JButton vireBtn;
     // End of variables declaration//GEN-END:variables
 }
