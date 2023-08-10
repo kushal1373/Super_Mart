@@ -1,6 +1,4 @@
 import static org.junit.Assert.*;
-import java.util.List;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import DAO.productDAO;
@@ -12,11 +10,6 @@ public class producttesting {
     @Before
     public void setUp() {
         productDAO = new productDAO();
-    }
-
-    @After
-    public void tearDown() {
-        // Clean up any resources or close database connection if required
     }
 
     @Test
@@ -44,20 +37,5 @@ public class producttesting {
         boolean success = productDAO.delete(product);
         assertTrue(success);
     }
-
-   
-
-//    @Test
-//    public void testGetAllProducts() {
-//        List<ProductModel> products = productDAO.getAllProducts();
-//        assertNotNull(products);
-//        // Since the database may contain other products as well,
-//        // we can't assume the exact number of products retrieved.
-//        // So, we only check if the list is not empty.
-//        assertFalse(products.isEmpty());
-//    }
-
-    // Add more test cases as per your requirements
-
 
 }
